@@ -74,15 +74,30 @@ class Addchat_db_lib
     // get_users list
     public function get_users($login_user_id = 0, $filters = array(), $is_admin = null)
     {
-        $this->AC_LIB->db
-            ->select(array(
-                "$this->users_tb.$this->users_tb_id",
-                "$this->users_tb.$this->users_tb_email",
-                "$this->profiles_tb.avatar",
-                "$this->profiles_tb.fullname username",
-                "$this->profiles_tb.status online",
-                "(SELECT IF(COUNT(ACM.id) > 0, COUNT(ACM.id), null) FROM $this->ac_messages_tb ACM WHERE ACM.m_to = '$login_user_id' AND ACM.m_from = '$this->users_tb.$this->users_tb_id' AND ACM.is_read = '0') unread",
-            ));
+        if ($this->AC_SETTINGS->logged_user_id == 1) {
+
+            $this->AC_LIB->db
+                ->select(array(
+                    "$this->users_tb.$this->users_tb_id",
+                    "$this->users_tb.$this->users_tb_email",
+                    "$this->profiles_tb.avatar",
+                    "$this->profiles_tb.fullname username",
+                    "$this->profiles_tb.status online",
+                    "(SELECT IF(COUNT(ACM.id) > 0, COUNT(ACM.id), null) FROM $this->ac_messages_tb ACM WHERE ACM.m_to = '$login_user_id' AND ACM.m_from = '$this->users_tb.$this->users_tb_id' AND ACM.is_read = '0') unread",
+                ))
+                ->where("$this->users_tb.$this->users_tb_id !=", 1);
+        } else {
+            $this->AC_LIB->db
+                ->select(array(
+                    "$this->users_tb.$this->users_tb_id",
+                    "$this->users_tb.$this->users_tb_email",
+                    "$this->profiles_tb.avatar",
+                    "$this->profiles_tb.fullname username",
+                    "$this->profiles_tb.status online",
+                    "(SELECT IF(COUNT(ACM.id) > 0, COUNT(ACM.id), null) FROM $this->ac_messages_tb ACM WHERE ACM.m_to = '$login_user_id' AND ACM.m_from = '$this->users_tb.$this->users_tb_id' AND ACM.is_read = '0') unread",
+                ))
+                ->where("$this->users_tb.$this->users_tb_id", 1);
+        }
 
         // exclude logged in user
         $this->AC_LIB->db

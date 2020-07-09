@@ -263,8 +263,8 @@
                              <div class="block-34">
                                  <div class="image ">
                                      <a href="<?php echo base_url() . 'paket_tour/detail_paket/' . $idberita; ?>">
-                                         <!-- <img src="<?php echo base_url() . 'assets/gambars/' . $gbr; ?>" class="img-fluid" style="height: 250px;" alt="Image placeholder"></a> -->
-                                         <img src="https://drive.google.com/uc?export=view&amp;id=1YJOrmoAJ-EOaq94J3SNP8avPoqFSx2Ve" class="img-fluid" style="height: 250px;" alt="Image placeholder"></a>
+                                         <img src="<?php echo base_url() . 'assets/gambars/' . $gbr; ?>" class="img-fluid" style="height: 250px;" alt="Image placeholder"></a>
+                                     <!-- <img src="https://drive.google.com/uc?export=view&amp;id=1YJOrmoAJ-EOaq94J3SNP8avPoqFSx2Ve" class="img-fluid" style="height: 250px;" alt="Image placeholder"></a> -->
                                  </div>
                                  <div class="text">
                                      <h2 class="heading"><a href="<?php echo base_url() . 'paket_tour/detail_paket/' . $idberita; ?>"><?= $judul; ?>g</a></h2>
