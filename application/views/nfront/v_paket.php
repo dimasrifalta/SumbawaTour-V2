@@ -108,11 +108,12 @@
 
                              <h2 class="heading"><?= $judul; ?></h2>
                              <ul class="specs mb-5">
-                                 <li><strong>Dewasa: 1 <div class="price"><sup>$</sup><span class="number"><?= $hargadewasa; ?></span><sub>/per tours</sub></div>
+                                 <li><strong>
+                                         <div class="price"><sup>Rp. </sup><span class="number"><?= number_format($hargadewasa); ?></span><sub>/per orang</sub></div>
                                      </strong></li>
 
-                                 <li><strong>Anak-anak: 1 <div class="price"><sup>$</sup><span class="number"><?= $hrg_anak; ?></span><sub>/per tours</sub></div>
-                                     </strong></li>
+                                 <!-- <li><strong>Anak-anak: 1 <div class="price"><sup>$</sup><span class="number"><?= $hrg_anak; ?></span><sub>/per tours</sub></div>
+                                     </strong></li> -->
                                  <li><strong>Categories:</strong> Single</li>
 
 
@@ -152,7 +153,7 @@
  <?php if ($this->session->flashdata('flash')) : ?>
      <script>
          setTimeout(function() {
-             swal('Succes!', 'Terimah kasih Telah Melakukan Order Silahkan cek email Anda. Kami Telah mengirim jumlah yang harus anda bayar dan No.rekening yang ditujuh', 'success')
+             swal('Succes!', 'Terimah kasih Telah Melakukan Order Silahkan cek email Anda. Kami Telah mengirim jumlah yang harus anda bayar dan No.rekening yang ditujuh. Lakukan konfirmasi pembayaran maksimal 1X24 dari paket tour di pesan', 'success')
          }, 10);
          window.setTimeout(function() {
 

@@ -440,13 +440,13 @@ $b = $data->row_array();
                                 <table cellspacing="0" cellpadding="0" width="100%">
                                     <tr>
                                         <td class="title-dark" width="300">
-                                            Tanggal berangkat
+                                            Tanggal Berangkat-Kembali
                                         </td>
                                         <td class="title-dark" width="163">
-                                            Dewasa
+                                            Harga Per Orang
                                         </td>
                                         <td class="title-dark" width="163">
-                                            Anak-anak
+                                            Jumlah Berangkat
                                         </td>
                                         <td class="title-dark" width="97">
                                             Total
@@ -460,17 +460,17 @@ $b = $data->row_array();
                                                 <tr>
 
                                                     <td class="product">
-                                                        <span style="color: #4d4d4d; font-weight:bold;"><?php echo tanggal($b['berangkat']); ?></span>
+                                                        <span style="color: #4d4d4d; font-weight:bold;"><?php echo tanggal($b['berangkat']); ?>-<?php echo tanggal($b['kembali']); ?></span>
 
                                                     </td>
                                                 </tr>
                                             </table>
                                         </td>
                                         <td class="item-col quantity">
-                                            <?php echo $b['adult'] . ' Orang'; ?>
+                                            <?php echo 'Rp. ' . number_format($b['hrg_dewasa']) . '/Orang'; ?>
                                         </td>
                                         <td class="item-col">
-                                            <?php echo $b['kids'] . ' Orang'; ?>
+                                            <?php echo $b['jml_berangkat'] . ' Orang'; ?>
                                         </td>
 
                                         <td class="item-col">

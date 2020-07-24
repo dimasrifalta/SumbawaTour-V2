@@ -144,18 +144,29 @@ $b = $ketersediaan->row_array();
                         <input type="text" name="nama_paket" class="form-control" value="<?php echo $b['nama_paket'] ?>" readonly="readonly" required />
                     </div>
 
+                    <div class="mb-3">
+                        <label for="notelp">Harga paket Tour</label>
+                        <input type="text" class="form-control" id="hargaexample" name="hargaexample" class="spinner-min0" value="Rp. <?php echo number_format($b['hrg_dewasa']) ?>/Orang" readonly>
+                    </div>
+
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="th_sewa">Dewasa</label>
+                            <label for="th_sewa">Jumlah Berangkat</label>
+                            <input type="hidden" class="form-control" id="harga" name="harga" class="spinner-min0" value="<?php echo $b['hrg_dewasa'] ?>" readonly>
                             <input type="number" min="1" max="<?= $b['jumlah_ketersedian']; ?>" class="form-control" id="adultamt" name="adultamt" value="1">
                         </div>
 
 
                         <div class="col-md-6 mb-3">
-                            <label for="th_sewa">Anak-Anak 12th</label>
-                            <input type="number" class="form-control" id="childrenamt" name="childrenamt" value="0" class="spinner-min0" />
+                            <label for="th_sewa">Total</label>
+                            <input type="text" class="form-control" id="total" name="total" class="spinner-min0" value="Rp. " readonly>
                         </div>
+
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="th_sewa">Anak-Anak 12th</label>
+                            <input type="hidden" class="form-control" id="childrenamt" name="childrenamt" value="0" class="spinner-min0" />
+                        </div> -->
                     </div>
                     <div class="mb-3">
                         <div class="field-icon-wrap">
@@ -211,3 +222,44 @@ $b = $ketersediaan->row_array();
         </div>
     </div>
 </div>
+<script src="<?= base_url('assets/vendors/'); ?>/photon/js/jquery-3.3.1.min.js"></script>
+
+<!-- <script>
+    $(document).ready(function() {
+        //this calculates values automatically 
+        calculateSum();
+
+        $(".adultamt").on("keydown keyup change", function() {
+            calculateSum();
+        });
+    });
+
+    function calculateSum() {
+        var sum = 0;
+        //iterate through each textboxes and add the values
+        $(".adultamt").each(function() {
+            //add only if the value is number
+            if (!isNaN(this.value) && this.value.length != 0) {
+                sum += parseFloat(this.value);
+                $(this).css("background-color", "#FEFFB0");
+            } else if (this.value.length != 0) {
+                $(this).css("background-color", "red");
+            }
+        });
+
+        $("input#total").val(sum.toFixed(2));
+    }
+</script> -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#adultamt").on("keydown keyup change", function() {
+            var harga = parseInt($("#harga").val());
+            var jumlah = parseInt($("#adultamt").val());
+            var total = harga * jumlah;
+            var rp = "Rp. "
+            var rupiah = rp + total;
+            $("#total").val(rupiah);
+        });
+    });
+</script>
