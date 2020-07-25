@@ -102,6 +102,9 @@
                                     <div class="py-2 text-uppercase">Alamat Pemesan</div>
                                 </th>
                                 <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Status</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
                                     <div class="py-2 text-uppercase">Aksi</div>
                                 </th>
                             </tr>
@@ -123,19 +126,21 @@
                                     </th>
                                     <td class="border-0 align-middle"><strong><?php echo $b['berangkat'] ?></strong></td>
                                     <td class="border-0 align-middle"><strong><?php echo $b['alamat'] ?></strong></td>
+                                    <?php
+                                    if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
+
+                                        <td class="border-0 align-middle"><strong>BELUM BAYAR</strong></td>
+
+
+                                    <?php } elseif ($b['status'] ==  "LUNAS") { ?>
+                                        <td class="border-0 align-middle"><strong>LUNAS</strong></td>
+                                    <?php } ?>
+
+
                                     <td class="border-0 align-middle">
-                                        <?php
-                                        if ($b['pembatalan'] ==  "CANCEL" or $b['pembatalan'] == "BATAL") { ?>
 
-                                            <a href="<?php echo base_url() . 'paket_tour/Detail_booking/' . $b['id_order']; ?>" class="text-dark"><i class='fa fa-window-close'>CANCELED</i></a></td>
-                                <?php } elseif ($date > $b['berangkat']) { ?>
-                                    <a href="<?php echo base_url() . 'paket_tour/Detail_booking/' . $b['id_order']; ?>" class="text-dark"><i class='fa fa-window-close'>Lihat Tetimoni</i></a></td>
-
-                                <?php } else { ?>
-                                    <a href="<?php echo base_url() . 'paket_tour/Detail_booking/' . $b['id_order']; ?>" class="text-dark"><i class='fa fa-trash'>Batalkan</i></a></td>
-                                <?php } ?>
-
-
+                                        <a href="<?php echo base_url() . 'paket_tour/Detail_booking/' . $b['id_order']; ?>" class="text-dark"><i class='fas fa-eye'>Lihat Invoice</i></a>
+                                    </td>
                             </tr>
 
                         <?php

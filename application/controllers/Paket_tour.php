@@ -113,6 +113,8 @@ class Paket_tour extends CI_Controller
         $paket = strip_tags(str_replace("'", "", $this->input->post('paket')));
         $no_ktp = strip_tags(str_replace("'", "", $this->input->post('no_ktp')));
         $id = $this->input->post('id');
+        $status_expired = 'N';
+        $expired_date = time();
 
 
 
@@ -122,7 +124,7 @@ class Paket_tour extends CI_Controller
 
         $ket = htmlspecialchars($this->input->post('notebox', true));
         $id_user = $this->session->userdata('id');
-        $this->Mpaket->simpan_order($no_order, $id_user, $nama, $jekel, $alamat, $notelp, $email, $paket, $dewasa, $anak2, $ket, $no_ktp, $id);
+        $this->Mpaket->simpan_order($no_order, $id_user, $nama, $jekel, $alamat, $notelp, $email, $paket, $dewasa, $anak2, $ket, $no_ktp, $id, $status_expired, $expired_date);
         $this->session->set_userdata('invoices', $no_order);
         $x['photo'] = $this->Mberita->get_photo();
         $x['data'] = $this->Mpaket->get_metode();

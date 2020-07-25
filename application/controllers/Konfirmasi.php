@@ -26,41 +26,49 @@ class Konfirmasi extends CI_Controller
         $kode = $this->input->post('invoice');
         $data = $this->Morders->cek_invoice($kode);
         $q = $data->num_rows();
+
         if ($q > 0) {
-            $nmfile = "file_" . time(); //nama file saya beri nama langsung dan diikuti fungsi time
-            $config['upload_path'] = './assets/bukti_transfer/'; //path folder
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
-            $config['max_size'] = '15048';
+            //waktu konfirmasi pembayaran
+            $e = $data->row_array();
+            if (time() - $e['expired_date'] < (60 * 60 * 24)) {
+                $nmfile = "file_" . time(); //nama file saya beri nama langsung dan diikuti fungsi time
+                $config['upload_path'] = './assets/bukti_transfer/'; //path folder
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+                $config['max_size'] = '15048';
 
-            $config['max_width'] = '9588';
-            $config['max_height'] = '7000';
-            $config['file_name'] = $nmfile;
+                $config['max_width'] = '9588';
+                $config['max_height'] = '7000';
+                $config['file_name'] = $nmfile;
 
-            $this->upload->initialize($config);
-            if ($_FILES['filefoto']['name']) {
-                if ($this->upload->do_upload('filefoto')) {
-                    $gbr = $this->upload->data();
-                    $gambar = $gbr['file_name'];
-                    $noinvoice = strip_tags(str_replace("'", "", $this->input->post('invoice')));
-                    $id_user = strip_tags(str_replace("'", "", $this->input->post('id_user')));
-                    $nama = strip_tags(str_replace("'", "", $this->input->post('nama')));
-                    $bank = $this->input->post('bank');
-                    $tgl2 = $this->input->post('tgl_bayar');
-                    $tgl_bayar = date('Y-m-d', strtotime($tgl2));
-                    $jumlah = strip_tags(str_replace("'", "", $this->input->post('jumlah')));
+                $this->upload->initialize($config);
+                if ($_FILES['filefoto']['name']) {
+                    if ($this->upload->do_upload('filefoto')) {
+                        $gbr = $this->upload->data();
+                        $gambar = $gbr['file_name'];
+                        $noinvoice = strip_tags(str_replace("'", "", $this->input->post('invoice')));
+                        $id_user = strip_tags(str_replace("'", "", $this->input->post('id_user')));
+                        $nama = strip_tags(str_replace("'", "", $this->input->post('nama')));
+                        $bank = $this->input->post('bank');
+                        $tgl2 = $this->input->post('tgl_bayar');
+                        $tgl_bayar = date('Y-m-d', strtotime($tgl2));
+                        $jumlah = strip_tags(str_replace("'", "", $this->input->post('jumlah')));
 
-                    if ($gambar == true) {
-                        $this->Morders->simpan_bukti($noinvoice, $id_user, $nama, $bank, $tgl_bayar, $jumlah, $gambar);
-                    } else {
+                        if ($gambar == true) {
+                            $this->Morders->simpan_bukti($noinvoice, $id_user, $nama, $bank, $tgl_bayar, $jumlah, $gambar);
+                        } else {
+                            redirect('konfirmasi');
+                        }
+                        $this->session->set_flashdata('flash', 'Ditambahkan');
+
                         redirect('konfirmasi');
                     }
-                    $this->session->set_flashdata('flash', 'Ditambahkan');
-
-                    redirect('konfirmasi');
                 }
+            } else {
+                $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">No Invoice Kadaluarsa, harap melakukan order kembali!</div>');
+                redirect('konfirmasi');
             }
         } else {
-            echo $this->session->set_flashdata('msg', 'No Invoice tidak cocok, coba cek lagi!');
+            echo $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">No Invoice Tidak Valid!</div>');
             redirect('konfirmasi');
         }
     }

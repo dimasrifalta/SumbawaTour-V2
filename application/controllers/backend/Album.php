@@ -10,14 +10,14 @@ class Album extends CI_Controller
             $url = base_url();
             redirect($url);
         };
-        $this->load->model('Mtestimoni');
+        $this->load->model('Malbum');
         $this->load->library('upload');
         $this->load->library('pdf');
     }
     function index()
     {
         if ($this->session->userdata('akses') == '1') {
-            $x['data'] = $this->Mtestimoni->tampil_album();
+            $x['data'] = $this->Malbum->tampil_album();
             $this->load->view('backend/v_album', $x);
         } else {
             echo "Halaman tidak ditemukan";
@@ -39,7 +39,7 @@ class Album extends CI_Controller
                 $gambar = $gbr['file_name'];
                 $jdl = $this->input->post('judul');
 
-                $this->Mtestimoni->SimpanAlbum($jdl, $gambar);
+                $this->Malbum->SimpanAlbum($jdl, $gambar);
                 echo $this->session->set_flashdata('msg', 'success');
                 redirect('backend/album');
             } else {
@@ -77,7 +77,7 @@ class Album extends CI_Controller
                 $kode = $this->input->post('kode');
                 $judul = $this->input->post('judul');
 
-                $this->Mtestimoni->update_album_with_img($kode, $judul, $gambar);
+                $this->Malbum->update_album_with_img($kode, $judul, $gambar);
                 echo $this->session->set_flashdata('msg', 'info');
                 redirect('backend/album');
             } else {
@@ -87,7 +87,7 @@ class Album extends CI_Controller
         } else {
             $kode = $this->input->post('kode');
             $judul = $this->input->post('judul');
-            $this->Mtestimoni->update_album($kode, $judul);
+            $this->Malbum->update_album($kode, $judul);
             echo $this->session->set_flashdata('msg', 'info');
             redirect('backend/album');
         }
@@ -97,7 +97,7 @@ class Album extends CI_Controller
     {
         if ($this->session->userdata('akses') == '1') {
             $id = $this->input->post('kode');
-            $this->Mtestimoni->hapus_album($id);
+            $this->Malbum->hapus_album($id);
             echo $this->session->set_flashdata('msg', 'success-hapus');
             redirect('backend/album');
         } else {

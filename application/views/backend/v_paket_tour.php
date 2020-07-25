@@ -528,7 +528,7 @@ function limit_words($string, $word_limit)
 
 
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="control-label col-xs-2">Tour Gate</label>
               <div class="col-xs-8">
                 <select name="id_operator" id="paket2" data-width="100%" class="form-control" required>
@@ -543,7 +543,7 @@ function limit_words($string, $word_limit)
                   <?php } ?>
                 </select>
               </div>
-            </div>
+            </div> -->
 
 
             <div class="form-group">

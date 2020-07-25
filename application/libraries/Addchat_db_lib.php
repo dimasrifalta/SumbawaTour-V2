@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
+date_default_timezone_set('Asia/Jakarta');
 /**
  * Library Addchat_db_lib
  *
@@ -85,7 +85,9 @@ class Addchat_db_lib
                     "$this->profiles_tb.status online",
                     "(SELECT IF(COUNT(ACM.id) > 0, COUNT(ACM.id), null) FROM $this->ac_messages_tb ACM WHERE ACM.m_to = '$login_user_id' AND ACM.m_from = '$this->users_tb.$this->users_tb_id' AND ACM.is_read = '0') unread",
                 ))
-                ->where("$this->users_tb.$this->users_tb_id !=", 1);
+                ->where("$this->users_tb.$this->users_tb_id !=", 1)
+                ->where("$this->users_tb.is_active !=", 0)
+                ->order_by("dt_updated DESC");
         } else {
             $this->AC_LIB->db
                 ->select(array(

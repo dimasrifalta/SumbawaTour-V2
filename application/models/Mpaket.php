@@ -36,9 +36,9 @@ class Mpaket extends CI_Model
         return $hasil;
     }
 
-    public function simpan_ketersedian_paket($id_paket_tour, $tgl_awal, $tgl_akhir, $jumlah_ketersedian, $id_operator)
+    public function simpan_ketersedian_paket($id_paket_tour, $tgl_awal, $tgl_akhir, $jumlah_ketersedian)
     {
-        $hasil = $this->db->query("INSERT INTO available_tour(id_paket_tour,tgl_awal,tgl_akhir,jumlah_ketersedian,id_operator,status) VALUES ('$id_paket_tour','$tgl_awal','$tgl_akhir','$jumlah_ketersedian','$id_operator','1')");
+        $hasil = $this->db->query("INSERT INTO available_tour(id_paket_tour,tgl_awal,tgl_akhir,jumlah_ketersedian,status) VALUES ('$id_paket_tour','$tgl_awal','$tgl_akhir','$jumlah_ketersedian','1')");
         return $hasil;
     }
 
@@ -69,7 +69,7 @@ class Mpaket extends CI_Model
 
     public function tampil_availible_tour()
     {
-        $hasil = $this->db->query("select id_operator,available_tour.id, gambar,nama_paket,hrg_dewasa,hrg_anak,deskripsi,kategori_id,available_tour.id_paket_tour,tgl_awal,tgl_akhir,jumlah_ketersedian from paket INNER JOIN available_tour WHERE paket.idpaket=available_tour.id_paket_tour AND available_tour.status='1' ");
+        $hasil = $this->db->query("select id_operator,available_tour.id, gambar,nama_paket,hrg_dewasa,hrg_anak,deskripsi,kategori_id,available_tour.id_paket_tour,tgl_awal,tgl_akhir,jumlah_ketersedian from paket INNER JOIN available_tour WHERE paket.idpaket=available_tour.id_paket_tour AND available_tour.status='1' ORDER BY tgl_awal DESC ");
         return $hasil;
     }
     public function berita()
@@ -134,9 +134,9 @@ class Mpaket extends CI_Model
         }
         return "INV" . date('dmy') . $kd;
     }
-    public function simpan_order($no_order, $id_user, $nama, $jekel, $alamat, $notelp, $email, $paket, $dewasa, $anak2, $ket, $no_ktp, $id)
+    public function simpan_order($no_order, $id_user, $nama, $jekel, $alamat, $notelp, $email, $paket, $dewasa, $anak2, $ket, $no_ktp, $id, $status_expired, $expired_date)
     {
-        $hasil = $this->db->query("INSERT INTO orders(id_order,id_user,nama,jenkel,alamat,notelp,email,berangkat,kembali,adult,kids,paket_id_order,id_ketersediaan_tanggal,keterangan,tanggal,status, no_ktp)VALUES('$no_order','$id_user','$nama','$jekel','$alamat','$notelp','$email',(SELECT tgl_awal from  available_tour where 	id = '$id'),(SELECT tgl_akhir from  available_tour where id = '$id'),'$dewasa','$anak2','$paket','$id','$ket',CURDATE(),'belum_bayar', '$no_ktp')");
+        $hasil = $this->db->query("INSERT INTO orders(id_order,id_user,nama,jenkel,alamat,notelp,email,berangkat,kembali,adult,kids,paket_id_order,id_ketersediaan_tanggal,keterangan,tanggal,status, no_ktp,status_expired, expired_date)VALUES('$no_order','$id_user','$nama','$jekel','$alamat','$notelp','$email',(SELECT tgl_awal from  available_tour where 	id = '$id'),(SELECT tgl_akhir from  available_tour where id = '$id'),'$dewasa','$anak2','$paket','$id','$ket',CURDATE(),'belum_bayar', '$no_ktp','$status_expired','$expired_date')");
         return $hasil;
     }
 
@@ -163,7 +163,7 @@ class Mpaket extends CI_Model
     {
 
         $id_user = $this->session->userdata('id');
-        $hasil = $this->db->query("SELECT deskripsi,orders.kode_booking,orders.status,pembayaran.id_user,orders.pembatalan, id_order,tanggal,nama_paket,hrg_dewasa,hrg_anak,adult,kids,SUM(adult + kids)AS jml_berangkat,(hrg_dewasa*adult) AS sub_dewasa,(hrg_anak*kids)AS sub_anak,SUM((hrg_dewasa*adult)+(hrg_anak*kids))AS total,berangkat,kembali,metode,bank,norek,atasnama,nama,IF(jenkel='L','Laki-Laki','Perempuan')AS jenkel,alamat,notelp,email FROM orders JOIN metode_bayar ON orders.metode_id=metode_bayar.id_metode JOIN paket ON orders.paket_id_order=paket.idpaket JOIN pembayaran ON orders.id_order=pembayaran.order_id WHERE pembayaran.id_user='$id_user' AND pembayaran.order_id='$id' AND orders.status='LUNAS' OR orders.status='BATAL' ");
+        $hasil = $this->db->query("SELECT deskripsi,orders.kode_booking,orders.status,pembayaran.id_user,orders.pembatalan, id_order,tanggal,nama_paket,hrg_dewasa,hrg_anak,adult,kids,SUM(adult + kids)AS jml_berangkat,(hrg_dewasa*adult) AS sub_dewasa,(hrg_anak*kids)AS sub_anak,SUM((hrg_dewasa*adult)+(hrg_anak*kids))AS total,berangkat,kembali,metode,bank,norek,atasnama,nama,IF(jenkel='L','Laki-Laki','Perempuan')AS jenkel,alamat,notelp,email FROM orders JOIN metode_bayar ON orders.metode_id=metode_bayar.id_metode JOIN paket ON orders.paket_id_order=paket.idpaket JOIN pembayaran ON orders.id_order=pembayaran.order_id WHERE pembayaran.id_user='$id_user' AND pembayaran.order_id='$id'  ");
         return $hasil;
     }
 
@@ -188,7 +188,7 @@ class Mpaket extends CI_Model
     {
 
 
-        $hasil = $this->db->query("SELECT a.id_order,a.pembatalan, a.tanggal, d.nama_paket,a.berangkat,a.kembali,s.metode,s.bank,s.norek,s.atasnama,a.alamat,a.notelp,a.email,c.name,d.gambar FROM orders a INNER JOIN metode_bayar s ON a.metode_id = s.id_metode INNER JOIN paket d ON a.paket_id_order = d.idpaket INNER JOIN user c ON a.id_user = c.id WHERE a.id_user='$id_user' AND a.status='LUNAS' OR a.status='BATAL' ");
+        $hasil = $this->db->query("SELECT a.id_order,a.pembatalan, a.tanggal, d.nama_paket,a.berangkat,a.kembali,s.metode,s.bank,s.norek,s.atasnama,a.alamat,a.notelp,a.email,c.name,d.gambar,a.status FROM orders a INNER JOIN metode_bayar s ON a.metode_id = s.id_metode INNER JOIN paket d ON a.paket_id_order = d.idpaket INNER JOIN user c ON a.id_user = c.id WHERE a.id_user='$id_user' ");
         return $hasil;
     }
 
