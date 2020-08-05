@@ -82,7 +82,7 @@ ob_start();
             <br>
 
             <div id="footer-tanggal">
-                Bandung, <?php echo "$hari_ini"; ?>
+                Bandung, <?= tanggal($hari_ini); ?>
             </div>
             <div id="footer-jabatan">
                 Pimpinan

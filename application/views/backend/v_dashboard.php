@@ -46,7 +46,7 @@ $jum_konfirmasi = $query3->num_rows();
 
   <?php
   /* Mengambil query report*/
-  foreach ($penjualan as $result) {
+  foreach ($penjualan_mounth as $result) {
     $bulan2[] = $result->tgl; //ambil bulan
     $value2[] = (float) $result->jumlah; //ambil nilai
   }

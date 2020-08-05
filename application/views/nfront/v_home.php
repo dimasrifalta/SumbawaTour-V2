@@ -86,19 +86,19 @@
              <div class="container">
                  <div class="row align-items-center">
                      <div class="col-md-10">
-                         <span class="subheading-sm">Welcome</span>
-                         <h2 class="heading">Enjoy a Luxury Experience</h2>
+                         <span class="subheading-sm">Explore Sumbawa Island</span>
+                         <!-- <h2 class="heading">Trips</h2> -->
                          <p><a href="<?= base_url('paket_tour'); ?>" class="btn py-4 px-5 btn-primary">Learn More</a></p>
                      </div>
                  </div>
              </div>
          </div>
-         <div class="block-30 item img-fluid " style="background-image: url('<?php echo base_url() . 'assets/vendors/images/self-driving-tour1.jpg' ?>');" data-stellar-background-ratio="1">
+         <div class="block-30 item" style="background-image: url('<?php echo base_url() . 'assets/vendors/images/self-driving-tour1.jpg' ?>');" data-stellar-background-ratio="1">
              <div class="container">
                  <div class="row align-items-center">
                      <div class="col-md-10">
-                         <span class="subheading-sm">Welcome</span>
-                         <h2 class="heading">Simple &amp; Elegant</h2>
+                         <span class="subheading-sm">Trips, experiences and places.</span>
+                         <!-- <h2 class="heading"></h2> -->
                          <p><a href="<?= base_url('paket_tour'); ?>" class="btn py-4 px-5 btn-primary">Learn More</a></p>
                      </div>
                  </div>
@@ -108,8 +108,8 @@
              <div class="container">
                  <div class="row align-items-center">
                      <div class="col-md-10">
-                         <span class="subheading-sm">Welcome</span>
-                         <h2 class="heading">Simple &amp; Elegant</h2>
+                         <span class="subheading-sm">All in one service.</span>
+                         <!-- <h2 class="heading">  All in one service.</h2> -->
                          <p><a href="<?= base_url('paket_tour'); ?>" class="btn py-4 px-5 btn-primary">Learn More</a></p>
                      </div>
                  </div>

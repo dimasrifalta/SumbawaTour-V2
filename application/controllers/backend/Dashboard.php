@@ -18,7 +18,10 @@ class Dashboard extends CI_Controller
 	{
 		if ($this->session->userdata('akses') == '1') {
 			$x['visitor'] = $this->m_pengunjung->statistik_pengujung();
-			$x['penjualan'] = $this->m_pengunjung->statistik_penjualan();
+			$x['penjualan_mounth'] = $this->m_pengunjung->statistik_penjualan();
+
+			// var_dump($x['penjualan']);
+			// die;
 			$x['penjualan'] = $this->m_pengunjung->send_email();
 
 			$this->load->view('backend/v_dashboard', $x);

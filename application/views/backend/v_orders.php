@@ -367,7 +367,7 @@ $jum_konfirmasi = $query4->num_rows();
                         foreach ($data_transaksi->result_array() as $a) :
                           $no++;
                           $id = $a['id_order'];
-                          $tgl = $a['tanggal'];
+                          $tgl = $a['date_created'];
                           $nama = $a['nama'];
                           $jenkel = $a['jenkel'];
                           $alamat = $a['alamat'];

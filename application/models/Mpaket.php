@@ -180,7 +180,15 @@ class Mpaket extends CI_Model
     {
 
 
-        $hasil = $this->db->query("SELECT deskripsi,orders.kode_booking,pembayaran.id_user,orders.pembatalan, id_order,tanggal,nama_paket,hrg_dewasa,hrg_anak,adult,kids,SUM(adult + kids)AS jml_berangkat,(hrg_dewasa*adult) AS sub_dewasa,(hrg_anak*kids)AS sub_anak,SUM((hrg_dewasa*adult)+(hrg_anak*kids))AS total,berangkat,kembali,metode,bank,norek,atasnama,nama,IF(jenkel='L','Laki-Laki','Perempuan')AS jenkel,alamat,notelp,email FROM orders JOIN metode_bayar ON orders.metode_id=metode_bayar.id_metode JOIN paket ON orders.paket_id_order=paket.idpaket JOIN pembayaran ON orders.id_order=pembayaran.order_id WHERE pembayaran.order_id='$id' AND orders.status='LUNAS' ");
+        $hasil = $this->db->query("SELECT deskripsi,orders.kode_booking,pembayaran.id_user,orders.pembatalan, id_order,tanggal,nama_paket,hrg_dewasa,hrg_anak,adult,kids,SUM(adult + kids)AS jml_berangkat,(hrg_dewasa*adult) AS sub_dewasa,(hrg_anak*kids)AS sub_anak,SUM((hrg_dewasa*adult)+(hrg_anak*kids))AS total,berangkat,kembali,metode,bank,norek,atasnama,nama,IF(jenkel='L','Laki-Laki','Perempuan')AS jenkel,alamat,notelp,email FROM orders JOIN metode_bayar ON orders.metode_id=metode_bayar.id_metode JOIN paket ON orders.paket_id_order=paket.idpaket JOIN pembayaran ON orders.id_order=pembayaran.order_id WHERE pembayaran.order_id='$id' ");
+        return $hasil;
+    }
+
+    public function get_email($id)
+    {
+
+
+        $hasil = $this->db->query("SELECT orders.email FROM orders WHERE orders.id_order='$id' ");
         return $hasil;
     }
 

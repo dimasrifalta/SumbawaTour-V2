@@ -102,7 +102,7 @@ $b = $ketersediaan->row_array();
 
                     <div class="mb-3">
                         <label>Nama Lengkap (Traveler Utama)</label>
-                        <input type="text" class="form-control" id="firstname" name="nama" value="" required />
+                        <input type="text" class="form-control" value="<?= $this->session->userdata('name') ?>" firstname" name="nama" value="" required />
                     </div>
 
                     <div class="mb-3">
@@ -132,7 +132,7 @@ $b = $ketersediaan->row_array();
 
                     <div class="mb-3">
                         <label for="jml_bayar">Email (Traveler Utama)</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Contoh: mahakaryapromosindo@gmail.com" required>
+                        <input type="email" class="form-control" value="<?= $this->session->userdata('email') ?>" name="email" id="email" required>
                     </div>
                     <div class="mb-4 mt-4">
                         <h1 class="text-danger">*Wisata Info</h1>
@@ -141,7 +141,7 @@ $b = $ketersediaan->row_array();
                     <div class="mb-3">
                         <label for="notelp">Paket Pulau</label>
                         <input type="hidden" name="paket" class="form-control" value="<?php echo $b['idpaket'] ?>">
-                        <input type="text" name="nama_paket" class="form-control" value="<?php echo $b['nama_paket'] ?>" readonly="readonly" required />
+                        <input type="text" name="nama_paket" class="form-control" value="<?php echo $b['nama_paket'] ?>" readonly="readonly" disabled />
                     </div>
 
                     <div class="mb-3">
@@ -154,7 +154,7 @@ $b = $ketersediaan->row_array();
                         <div class="col-md-6 mb-3">
                             <label for="th_sewa">Jumlah Berangkat</label>
                             <input type="hidden" class="form-control" id="harga" name="harga" class="spinner-min0" value="<?php echo $b['hrg_dewasa'] ?>" readonly>
-                            <input type="number" min="1" max="<?= $b['jumlah_ketersedian']; ?>" class="form-control" id="adultamt" name="adultamt" value="1">
+                            <input type="number" min="1" max="<?= $b['jumlah_ketersedian']; ?>" class="form-control" id="adultamt" name="adultamt">
                         </div>
 
 
@@ -258,7 +258,8 @@ $b = $ketersediaan->row_array();
             var jumlah = parseInt($("#adultamt").val());
             var total = harga * jumlah;
             var rp = "Rp. "
-            var rupiah = rp + total;
+            var rupiah = rp + total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+
             $("#total").val(rupiah);
         });
     });

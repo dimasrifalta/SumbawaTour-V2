@@ -34,6 +34,7 @@ class Konfirmasi extends CI_Controller
             $res .= $chars[mt_rand(0, strlen($chars) - 1)];
         }
 
+        $this->_sendEmail($id);
         $this->Morders->bayar_selesai($id);
         $this->db->query("UPDATE paket SET views=views+1 WHERE idpaket='$idpaket'");
         $this->db->query("UPDATE orders SET kode_booking='$res' WHERE id_order='$id'");
@@ -47,7 +48,6 @@ class Konfirmasi extends CI_Controller
 
 
         //Kirim email_invoice
-        $this->_sendEmail($id);
 
         echo $this->session->set_flashdata('msg', 'success');
         redirect('backend/konfirmasi');
@@ -83,15 +83,18 @@ class Konfirmasi extends CI_Controller
             'charset'   => 'utf-8',
             'newline'   => "\r\n"
         ];
+        $email = $this->Mpaket->get_email($id)->row_array();
+        // var_dump($email['email']);
+        // die;
 
 
         $this->email->initialize($config);
         $this->email->from('bucekcoffe@gmail.com', 'Sumbawa Tour');
-        $this->email->to($this->session->userdata('email'));
+        $this->email->to($email['email']);
         $message = $this->load->view('nfront/email/email_invoice_booking', $x, TRUE);
 
 
-        $this->email->subject('E-Tiket Paket Tour Wisata -No.Pesanan' . $id);
+        $this->email->subject('E-Tiket Paket Tour Wisata -No.Pesanan ' . $id);
         $this->email->message($message);
         $this->email->attach($attach);
 
