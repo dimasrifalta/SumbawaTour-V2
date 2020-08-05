@@ -64,6 +64,9 @@ class Konfirmasi extends CI_Controller
                     }
                 }
             } else {
+                $this->db->set('status_expired', 'Y');
+                $this->db->where('id_order', $kode);
+                $this->db->update('orders');
                 $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">No Invoice Kadaluarsa, harap melakukan order kembali!</div>');
                 redirect('konfirmasi');
             }

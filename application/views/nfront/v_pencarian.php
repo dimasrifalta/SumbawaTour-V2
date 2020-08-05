@@ -206,10 +206,10 @@
                                               </div>
                                               <div class="text">
                                                   <h2 class="heading"><a href="<?php echo base_url() . 'paket_tour/detail_paket/' . $idberita; ?>"><?= $judul; ?>g</a></h2>
-                                                  <div class="price"><sup>$</sup><span class="number"><?= $hargadewasa; ?></span><sub>/per orang</sub></div>
+                                                  <div class="price"><sup>Rp. </sup><span class="number"><?= $hargadewasa; ?></span><sub>/per orang</sub></div>
                                                   <ul class="specs">
                                                       <li><strong>Dipesan: <?= $views; ?></strong> Kali </li>
-                                                      <li><strong>Child: <?= $hrg_anak; ?></strong> 12th</li>
+                                                      <!-- <li><strong>Child: <?= $hrg_anak; ?></strong> 12th</li> -->
                                                       <!-- <li><strong>Deskripsi: </strong> <?= $isi; ?></li> -->
 
                                                   </ul>
