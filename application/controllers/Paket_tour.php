@@ -2,6 +2,10 @@
     exit('No direct script access allowed');
 }
 
+require('assets/plugins/dompdf/autoload.inc.php');
+
+use Dompdf\Dompdf;
+
 class Paket_tour extends CI_Controller
 {
     public function __construct()
@@ -12,6 +16,7 @@ class Paket_tour extends CI_Controller
         $this->load->model('Morders');
         $this->load->model('Mwisata');
         $this->load->model('mtestimoni');
+        $this->load->library('pdf');
     }
     public function index()
     {
@@ -245,5 +250,22 @@ class Paket_tour extends CI_Controller
             window.location.href='../paket_tour';
             </script>";
         }
+    }
+
+    function printtiket($id)
+    {
+
+        //File name
+        $x['data'] = $this->Mpaket->booking_email($id);
+        $filename = "E-Ticket";
+        $this->load->library('pdf');
+        $this->load->view('nfront/email/attach', $x);
+        $html = $this->output->get_output();
+        $this->pdf->load_html($html);
+        // $customPaper = array(0,0,570,570);
+        //$this->pdf->set_paper($customPaper);
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->render();
+        $this->pdf->stream("E-Ticket Sumbawa Island Tour");
     }
 }

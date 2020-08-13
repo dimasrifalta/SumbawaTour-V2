@@ -114,7 +114,7 @@
 
                      <div class="mb-3">
                          <label>Pengirim</label>
-                         <input type="text" class="form-control" id="firstname" name="nama" placeholder="Nama pengirime" required />
+                         <input type="text" class="form-control" id="firstname" name="nama" placeholder="Nama pengirim" required />
                      </div>
 
 

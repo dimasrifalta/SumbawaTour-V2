@@ -19,10 +19,11 @@ $b = $data->row_array();
 <body>
     <header class="clearfix">
         <div id="logo">
-            <img src=" <?php echo $_SERVER["DOCUMENT_ROOT"] . '/plugins/invoice/logo.png'; ?>">
+            ta <img src="<?php echo FCPATH . 'assets/vendors/images/logo company.png'; ?>">
+
         </div>
         <div id=" company">
-            <h2 class="name">Sumbawa Tour Travel</h2>
+            <h2 class="name">Sumbawa Island Tour</h2>
             <div> 84454, Sumbawa<br>
                 AZ 85004, ID</div>
             <div>(602) 519-0450</div>

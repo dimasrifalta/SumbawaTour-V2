@@ -145,6 +145,36 @@ $b = $ketersediaan->row_array();
                     </div>
 
                     <div class="mb-3">
+                        <div class="field-icon-wrap">
+                            <label for="payment">Tanggal Tersedia</label>
+                            <?php if ($ketersediaan->num_rows() >= 1) { ?>
+                                <select name="id" id="paket" data-width="100%" class="form-control select2" required>
+
+                                    <option value="">Pilih</option>
+                                    <?php
+                                    foreach ($ketersediaan->result_array() as $i) {
+                                        $kode = $i['id'];
+                                        $tgl_awal = $i['tgl_awal'];
+                                        $tgl_akhir = $i['tgl_akhir'];
+                                        $jumlah_ketersedian = $i['jumlah_ketersedian'];
+                                    ?>
+                                        <option value='<?php echo $kode ?>'><?php echo tanggal($tgl_awal) ?> - <?php echo tanggal($tgl_akhir) ?> (<?= $jumlah_ketersedian ?> ORANG TERSEDIA)</option>
+                                    <?php } ?>
+                                <?php } else { ?>
+
+                                    <div class="alert alert-success" role="alert">
+                                        <h4 class="alert-heading">Jadwal Belum Tersedia!</h4>
+                                        <p>Mohon maaf, atas ketidaknyamanan. Untuk saat ini jadwal paket tour belum tersedia.</p>
+                                        <hr>
+                                        <p class="mb-0">Kami akan secepatnya mengupdate jadwal paket tour. Terima kasih atas perhatiannya. -Sumbawa Tour Travel.</p>
+                                    </div>
+                                <?php } ?>
+
+                                </select>
+                        </div>
+
+                    </div>
+                    <div class="mb-3">
                         <label for="notelp">Harga paket Tour</label>
                         <input type="text" class="form-control" id="hargaexample" name="hargaexample" class="spinner-min0" value="Rp. <?php echo number_format($b['hrg_dewasa']) ?>/Orang" readonly>
                     </div>
@@ -168,35 +198,7 @@ $b = $ketersediaan->row_array();
                             <input type="hidden" class="form-control" id="childrenamt" name="childrenamt" value="0" class="spinner-min0" />
                         </div> -->
                     </div>
-                    <div class="mb-3">
-                        <div class="field-icon-wrap">
-                            <label for="payment">Tanggal Tersedia</label>
-                            <?php if ($ketersediaan->num_rows() >= 1) { ?>
-                                <select name="id" id="paket" data-width="100%" class="form-control select2" required>
 
-                                    <option>Pilih</option>
-                                    <?php
-                                    foreach ($ketersediaan->result_array() as $i) {
-                                        $kode = $i['id'];
-                                        $tgl_awal = $i['tgl_awal'];
-                                        $tgl_akhir = $i['tgl_akhir'];
-                                    ?>
-                                        <option value='<?php echo $kode ?>'><?php echo tanggal($tgl_awal) ?> - <?php echo tanggal($tgl_akhir) ?></option>
-                                    <?php } ?>
-                                <?php } else { ?>
-
-                                    <div class="alert alert-success" role="alert">
-                                        <h4 class="alert-heading">Jadwal Belum Tersedia!</h4>
-                                        <p>Mohon maaf, atas ketidaknyamanan. Untuk saat ini jadwal paket tour belum tersedia.</p>
-                                        <hr>
-                                        <p class="mb-0">Kami akan secepatnya mengupdate jadwal paket tour. Terima kasih atas perhatiannya. -Sumbawa Tour Travel.</p>
-                                    </div>
-                                <?php } ?>
-
-                                </select>
-                        </div>
-
-                    </div>
                     <div class="mb-3">
                         <label for="khusus">Permintaan Khusus</label>
                         <textarea class="form-control" id="deskripsi" name="notebox" rows="3"></textarea>

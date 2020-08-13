@@ -711,12 +711,13 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
                             } elseif ($date > $b['berangkat']) { ?>
 
                                 <a data-toggle="modal" data-target="#ModalUpdate<?php echo $b['id_order']; ?>" class="btn btn-primary py-1 px-2 ">Selesai dan beri testimoni</a>
+                                <a href="<?php echo base_url() . 'paket_tour/printtiket/' . $b['id_order']; ?>" class="btn btn-success py-1 px-2">Download Tiket</a>
 
                             <?php
                             } else { ?>
                                 <a href="<?php echo base_url() . 'pembatalan/index/' . $b['id_order']; ?>" class="btn btn-primary py-1 px-2">Pembatalan</a>
 
-                                <a href="<?php echo base_url() . 'paket_tour/download/' . $b['id_order']; ?>" class="btn btn-success py-1 px-2">Download Tiket</a>
+                                <a href="<?php echo base_url() . 'paket_tour/printtiket/' . $b['id_order']; ?>" class="btn btn-success py-1 px-2">Download Tiket</a>
 
                             <?php
                             } ?>

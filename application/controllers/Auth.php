@@ -127,7 +127,7 @@ class Auth extends CI_Controller
             /*kirim email*/
             $this->_sendEmail($token, 'verify');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please activate your account</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulations! your account has been created. Please activate your account</div>');
             redirect('auth');
         }
     }
