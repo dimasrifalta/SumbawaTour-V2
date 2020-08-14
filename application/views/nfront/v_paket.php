@@ -153,7 +153,7 @@
  <?php if ($this->session->flashdata('flash')) : ?>
      <script>
          setTimeout(function() {
-             swal('Succes!', 'Terimah kasih Telah Melakukan Order Silahkan cek email Anda. Kami Telah mengirim jumlah yang harus anda bayar dan No.rekening yang ditujuh. Lakukan konfirmasi pembayaran maksimal 1X24 dari paket tour di pesan', 'success')
+             swal('Succes!', 'Terimah kasih Telah Melakukan Order Silahkan cek email Anda. Kami Telah mengirim jumlah yang harus anda bayar dan No.rekening yang ditujuh. Lakukan konfirmasi pembayaran maksimal 1X24 Jam dari paket tour di pesan', 'success')
          }, 10);
          window.setTimeout(function() {
 

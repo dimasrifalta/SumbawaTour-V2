@@ -129,8 +129,12 @@ class Paket_tour extends CI_Controller
 
         $ket = htmlspecialchars($this->input->post('notebox', true));
         $id_user = $this->session->userdata('id');
+
         $this->Mpaket->simpan_order($no_order, $id_user, $nama, $jekel, $alamat, $notelp, $email, $paket, $dewasa, $anak2, $ket, $no_ktp, $id, $status_expired, $expired_date);
         $this->session->set_userdata('invoices', $no_order);
+        $a = $this->session->userdata('invoices');
+        $this->UpdateStok($a);
+
         $x['photo'] = $this->Mberita->get_photo();
         $x['data'] = $this->Mpaket->get_metode();
         $this->load->view('nfront/templates/f_header', $x);
@@ -252,7 +256,7 @@ class Paket_tour extends CI_Controller
         }
     }
 
-    function printtiket($id)
+    public function printtiket($id)
     {
 
         //File name
@@ -267,5 +271,35 @@ class Paket_tour extends CI_Controller
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->render();
         $this->pdf->stream("E-Ticket Sumbawa Island Tour");
+    }
+
+
+    public function UpdateStok($a)
+    {
+        //Update stok dengan stok - jumlah beli
+        $this->db->query("UPDATE available_tour SET jumlah_ketersedian=jumlah_ketersedian-(SELECT SUM(adult+kids)AS jml_berangkat FROM orders WHERE id_order='$a') WHERE id=(SELECT id_ketersediaan_tanggal from  orders WHERE id_order='$a') ");
+        $a1 = "SELECT date_created FROM orders where id_order='$a'";
+        $date_created = $this->db->query($a1)->row_array();
+
+        //Ambil jumlah beli
+        $a2 = "SELECT SUM(adult+kids)AS jml_berangkat FROM orders WHERE id_order='$a' ";
+        $jml_berangkat = $this->db->query($a2)->row_array();
+
+        //set batas pembayaran + 1 hari
+        $a3 = "SELECT DATE_ADD(orders.date_created, INTERVAL 1 DAY) AS Tomorrow FROM orders where id_order='$a'";
+        $Tomorrow = $this->db->query($a3)->row_array();
+        $tanggal = $Tomorrow['Tomorrow'];
+
+        //create event untuk order yang melebihi batas pembayaran 
+        $sql2 = " CREATE EVENT $a        
+                ON SCHEDULE AT '$tanggal'
+                    DO
+                    BEGIN
+                    SET @id_tanggal = (SELECT id_ketersediaan_tanggal from orders WHERE id_order='$a');                                                 
+                            UPDATE available_tour SET jumlah_ketersedian=jumlah_ketersedian + $jml_berangkat[jml_berangkat] WHERE id=@id_tanggal;
+                            UPDATE orders SET status_expired='Y' WHERE id_order='$a';                         
+                END ";
+
+        $this->db->query($sql2);
     }
 }

@@ -58,7 +58,8 @@ class Welcome extends CI_Controller
 
 	public function search_keyword()
 	{
-		$tgl1     = $this->input->post('cari', true);
+		$tgl1 = $this->input->post('cari', true);
+		$jumlah = $this->input->post('jumlah', true);
 
 
 		$tgl_awal = date('Y-m-d', strtotime($tgl1));
@@ -66,7 +67,7 @@ class Welcome extends CI_Controller
 		$x['paket'] = $this->Mberita->paket_footer();
 		$x['berita'] = $this->Mberita->berita_footer();
 		$x['photo'] = $this->Mberita->get_photo();
-		$x['results']    =   $this->Mpaket->search($tgl_awal);
+		$x['results']    =   $this->Mpaket->search($tgl_awal, $jumlah);
 
 
 		$this->load->view('nfront/templates/f_header');

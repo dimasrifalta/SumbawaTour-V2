@@ -6,7 +6,7 @@ class Morders extends CI_Model
 
     function cek_invoice($kode)
     {
-        $hasil = $this->db->query("SELECT * FROM orders WHERE id_order='$kode'");
+        $hasil = $this->db->query("SELECT * FROM orders WHERE id_order='$kode' AND status_expired !='Y'");
         return $hasil;
     }
     function simpan_testimoni($nama, $email, $msg)

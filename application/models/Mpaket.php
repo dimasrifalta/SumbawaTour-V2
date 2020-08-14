@@ -94,7 +94,7 @@ class Mpaket extends CI_Model
     public function get_ketersediaan_all($kode)
     {
         $date = date('Y-m-d');
-        $hasil = $this->db->query("SELECT paket.idpaket,paket.nama_paket,paket.hrg_dewasa,paket.hrg_anak,paket.deskripsi,paket.gambar,paket.views,available_tour.id,available_tour.tgl_awal,available_tour.tgl_akhir,available_tour.jumlah_ketersedian FROM paket JOIN available_tour ON paket.idpaket=available_tour.id_paket_tour WHERE available_tour.tgl_awal > '$date' AND idpaket='$kode' AND available_tour.status='1' order BY idpaket");
+        $hasil = $this->db->query("SELECT paket.idpaket,paket.nama_paket,paket.hrg_dewasa,paket.hrg_anak,paket.deskripsi,paket.gambar,paket.views,available_tour.id,available_tour.tgl_awal,available_tour.tgl_akhir,available_tour.jumlah_ketersedian FROM paket JOIN available_tour ON paket.idpaket=available_tour.id_paket_tour WHERE available_tour.tgl_awal > '$date' AND idpaket='$kode' AND available_tour.status='1' AND jumlah_ketersedian >0 order BY idpaket");
         return $hasil;
     }
     public function updatedenganimg($kode, $nama_paket, $kategori, $deskripsi, $hrg_dewasa, $hrg_anak, $gambar)
@@ -196,7 +196,7 @@ class Mpaket extends CI_Model
     {
 
 
-        $hasil = $this->db->query("SELECT a.id_order,a.pembatalan, a.tanggal, d.nama_paket,a.berangkat,a.kembali,s.metode,s.bank,s.norek,s.atasnama,a.alamat,a.notelp,a.email,c.name,d.gambar,a.status FROM orders a INNER JOIN metode_bayar s ON a.metode_id = s.id_metode INNER JOIN paket d ON a.paket_id_order = d.idpaket INNER JOIN user c ON a.id_user = c.id WHERE a.id_user='$id_user' ");
+        $hasil = $this->db->query("SELECT a.id_order,a.pembatalan, a.tanggal, d.nama_paket,a.berangkat,a.kembali,s.metode,s.bank,s.norek,s.atasnama,a.alamat,a.notelp,a.email,c.name,d.gambar,a.status FROM orders a INNER JOIN metode_bayar s ON a.metode_id = s.id_metode INNER JOIN paket d ON a.paket_id_order = d.idpaket INNER JOIN user c ON a.id_user = c.id WHERE a.id_user='$id_user' ORDER BY a.tanggal DESC");
         return $hasil;
     }
 
@@ -231,9 +231,9 @@ class Mpaket extends CI_Model
         return $hasil;
     }
 
-    function search($tgl_awal)
+    function search($tgl_awal, $jumlah)
     {
-        $hasil = $this->db->query("SELECT paket.idpaket,paket.nama_paket,paket.hrg_dewasa,paket.hrg_anak,paket.deskripsi,paket.gambar,paket.views,available_tour.id,available_tour.tgl_awal,available_tour.tgl_akhir,available_tour.jumlah_ketersedian FROM paket JOIN available_tour ON paket.idpaket=available_tour.id_paket_tour WHERE available_tour.tgl_awal > '$tgl_awal' GROUP BY idpaket");
+        $hasil = $this->db->query("SELECT paket.idpaket,paket.nama_paket,paket.hrg_dewasa,paket.hrg_anak,paket.deskripsi,paket.gambar,paket.views,available_tour.id,available_tour.tgl_awal,available_tour.tgl_akhir,available_tour.jumlah_ketersedian FROM paket JOIN available_tour ON paket.idpaket=available_tour.id_paket_tour WHERE available_tour.tgl_awal > '$tgl_awal' AND jumlah_ketersedian >='$jumlah' GROUP BY idpaket");
         return $hasil;
     }
 }

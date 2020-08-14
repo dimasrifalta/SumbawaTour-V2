@@ -19,7 +19,7 @@ $b = $data->row_array();
 <body>
     <header class="clearfix">
         <div id="logo">
-            ta <img src="<?php echo FCPATH . 'assets/vendors/images/logo company.png'; ?>">
+            <img src="<?php echo FCPATH . 'assets/vendors/images/logo company.png'; ?>">
 
         </div>
         <div id=" company">

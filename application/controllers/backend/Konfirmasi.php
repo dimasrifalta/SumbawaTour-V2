@@ -33,13 +33,14 @@ class Konfirmasi extends CI_Controller
         for ($i = 0; $i < 6; $i++) {
             $res .= $chars[mt_rand(0, strlen($chars) - 1)];
         }
-
+        // var_dump($res);
+        // die();
+        $this->db->query("UPDATE orders SET kode_booking='$res' WHERE id_order='$id'");
         $this->_sendEmail($id);
         $this->Morders->bayar_selesai($id);
         $this->db->query("UPDATE paket SET views=views+1 WHERE idpaket='$idpaket'");
-        $this->db->query("UPDATE orders SET kode_booking='$res' WHERE id_order='$id'");
 
-        $this->db->query("UPDATE available_tour SET jumlah_ketersedian=jumlah_ketersedian-(SELECT SUM(adult+kids)AS jml_berangkat FROM orders WHERE id_order='$id') WHERE id=(SELECT id_ketersediaan_tanggal from  orders WHERE id_order='$id') ");
+        // $this->db->query("UPDATE available_tour SET jumlah_ketersedian=jumlah_ketersedian-(SELECT SUM(adult+kids)AS jml_berangkat FROM orders WHERE id_order='$id') WHERE id=(SELECT id_ketersediaan_tanggal from  orders WHERE id_order='$id') ");
 
         //simpan data ketabel transaksi
         $date_created = date('Y-m-d H:i:s');
