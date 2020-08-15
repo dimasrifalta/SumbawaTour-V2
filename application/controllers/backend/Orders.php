@@ -14,6 +14,7 @@ class Orders extends CI_Controller
             redirect($url);
         };
         $this->load->model('Morders');
+        $this->load->model('Minquiryorder');
     }
     function index()
     {
@@ -21,6 +22,36 @@ class Orders extends CI_Controller
         $x['data_transaksi'] = $this->Morders->get_transaksi();
         $this->load->view('backend/v_orders', $x);
     }
+    // public function ajax_list()
+    // {
+    //     $list = $this->Minquiryorder->get_datatables();
+    //     // var_dump($list);
+    //     $data = array();
+    //     $no = 1;
+    //     foreach ($list as $customers) {
+
+    //         $row = array();
+    //         $row[] = $customers->id_order;
+    //         $row[] = $customers->tanggal;
+    //         $row[] = $customers->nama;
+    //         $row[] = $customers->jml_berangkat;
+    //         $row[] = $customers->nama_paket;
+    //         $row[] = $customers->berangkat;
+    //         $row[] = $customers->kembali;
+    //         $row[] = number_format($customers->total);
+
+    //         $data[] = $row;
+    //     }
+
+    //     $output = array(
+    //         "draw" => $_POST['draw'],
+    //         "recordsTotal" => $this->Minquiryorder->count_all(),
+    //         "recordsFiltered" => $this->Minquiryorder->count_filtered(),
+    //         "data" => $data,
+    //     );
+    //     //output to json format
+    //     echo json_encode($output);
+    // }
     function pembayaran_selesai()
     {
         $id = $this->uri->segment(4);

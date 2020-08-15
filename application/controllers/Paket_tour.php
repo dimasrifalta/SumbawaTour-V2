@@ -132,8 +132,7 @@ class Paket_tour extends CI_Controller
 
         $this->Mpaket->simpan_order($no_order, $id_user, $nama, $jekel, $alamat, $notelp, $email, $paket, $dewasa, $anak2, $ket, $no_ktp, $id, $status_expired, $expired_date);
         $this->session->set_userdata('invoices', $no_order);
-        $a = $this->session->userdata('invoices');
-        $this->UpdateStok($a);
+
 
         $x['photo'] = $this->Mberita->get_photo();
         $x['data'] = $this->Mpaket->get_metode();
@@ -185,6 +184,9 @@ class Paket_tour extends CI_Controller
         $id = $this->uri->segment(3);
         $no_invoice = $this->session->userdata('invoices');
         $this->Mpaket->set_bayar($no_invoice, $id);
+
+        //Update dan create event untuk mkasimal batas bayar
+        $this->UpdateStok($no_invoice);
 
         $this->_sendEmail();
 

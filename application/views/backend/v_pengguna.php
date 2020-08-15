@@ -348,7 +348,7 @@ $jum_konfirmasi = $query4->num_rows();
                                                         <tr>
                                                             <!-- <th>Photo</th> -->
                                                             <th>Nama</th>
-                                                            <th>Username</th>
+                                                            <th>Email</th>
                                                             <th>Password</th>
                                                             <th>Level</th>
                                                             <th style="text-align:right;">Aksi</th>
@@ -470,7 +470,7 @@ $jum_konfirmasi = $query4->num_rows();
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-xs-3">Username</label>
+                            <label class="control-label col-xs-3">Email</label>
                             <div class="col-xs-8">
                                 <input name="user" class="form-control" type="text" placeholder="username" required>
                             </div>
@@ -595,7 +595,7 @@ $jum_konfirmasi = $query4->num_rows();
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-xs-3">Username</label>
+                                <label class="control-label col-xs-3">Email</label>
                                 <div class="col-xs-8">
                                     <input name="user" value="<?php echo $username; ?>" class="form-control" type="text" placeholder="username" required>
                                 </div>
@@ -757,7 +757,7 @@ $jum_konfirmasi = $query4->num_rows();
 
                     <table>
                         <tr>
-                            <th style="width:120px;">Username</th>
+                            <th style="width:120px;">Email</th>
                             <th>:</th>
                             <th><?php echo $this->session->flashdata('uname'); ?></th>
                         </tr>

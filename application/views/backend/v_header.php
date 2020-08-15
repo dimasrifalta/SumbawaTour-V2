@@ -1,6 +1,8 @@
 <!--Counter Inbox-->
 <?php
 $query = $this->db->query("SELECT * FROM tbl_inbox WHERE inbox_status='1'");
+$query2 = $this->db->query("SELECT * FROM orders a JOIN pembayaran b ON a.id_order = b.order_id WHERE a.status='belum_bayar'");
+$jum_konfirmasi = $query2->num_rows();
 $jum_pesan = $query->num_rows();
 ?>
 <header class="main-header">
@@ -10,7 +12,7 @@ $jum_pesan = $query->num_rows();
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">STTRL</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">SUMBAWA-TRAVEL</span>
+        <span class="logo-lg">SUMBAWA-ISLAND</span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -60,6 +62,47 @@ $jum_pesan = $query->num_rows();
                         </li>
                         <li class="footer"><a href="<?php echo base_url() . 'backend/inbox' ?>">Lihat Semua Pesan</a>
                         </li>
+                    </ul>
+                </li>
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-danger"><?php echo $jum_konfirmasi; ?></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">Pemberitahuan Konfirmasi Pembayaran</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li>
+                                    <a href="#">
+                                        <i class="">
+                                            <?php
+                                            $konfirmasi = $this->db->query("SELECT * FROM orders a JOIN pembayaran b ON a.id_order = b.order_id WHERE a.status='belum_bayar'");
+                                            foreach ($konfirmasi->result_array() as $in) :
+                                                $order_id = $in['order_id'];
+                                                $nama = $in['nama'];
+
+                                            ?>
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $('#pesan_sedia').css("color", "red");
+                                                        $('#pesan_sedia').append("<span class='glyphicon glyphicon-asterisk'></span>");
+                                                    });
+                                                </script>
+
+
+                                                <div style='padding:5px' class='alert alert-info'><span class='glyphicon glyphicon-info-sign'></span> Konfirmasi Pembayaran Tiket Paket Tour dengan NO Invoice <a style='color:white'><?php echo $order_id; ?> Atas nama <?php echo $nama; ?></a></div>
+
+
+                                            <?php endforeach; ?>
+                                        </i>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="<?php echo base_url() . 'backend/konfirmasi' ?>">Lihat semua konfirmasi </a></li>
                     </ul>
                 </li>
 

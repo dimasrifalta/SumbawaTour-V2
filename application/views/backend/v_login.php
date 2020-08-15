@@ -32,7 +32,7 @@
 
             <form action="<?php echo base_url() . 'administrator/auth' ?>" method="post">
                 <div class="form-group has-feedback">
-                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                    <input type="text" name="username" class="form-control" placeholder="Email" required>
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
@@ -40,13 +40,13 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
-                    <div class="col-xs-8">
+                    <!-- <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
                                 <input type="checkbox"> Remember Me
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- /.col -->
                     <div class="col-xs-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
@@ -59,7 +59,7 @@
             <!-- /.social-auth-links -->
             <hr />
             <p>
-                <center>Copyright <?php echo date('Y'); ?> by Bucek-TRAVEL <br /> All Right Reserved</center>
+                <center>Copyright <?php echo date('Y'); ?> by SUMBAWA-ISLANDTOUR <br /> All Right Reserved</center>
             </p>
         </div>
         <!-- /.login-box-body -->

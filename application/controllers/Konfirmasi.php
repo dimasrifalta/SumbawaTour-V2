@@ -9,6 +9,7 @@ class Konfirmasi extends CI_Controller
         $this->load->model('Morders');
         $this->load->library('upload');
         $this->load->model('Mberita');
+        $this->load->model('Mpaket');
     }
     public function index()
     {
@@ -55,6 +56,8 @@ class Konfirmasi extends CI_Controller
 
                         if ($gambar == true) {
                             $this->Morders->simpan_bukti($noinvoice, $id_user, $nama, $bank, $tgl_bayar, $jumlah, $gambar);
+                            //kirim email ke admin untuk ditidaklanjuti 
+                            $this->_sendEmail($kode);
                         } else {
                             redirect('konfirmasi');
                         }
@@ -73,6 +76,48 @@ class Konfirmasi extends CI_Controller
         } else {
             echo $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">No Invoice Tidak Valid!</div>');
             redirect('konfirmasi');
+        }
+    }
+
+
+    /*kirim email*/
+    private function _sendEmail($kode)
+    {
+        $user1 = $this->Morders->send_email()->result_array();
+        $user = array_map(function ($current) {
+            return $current['username'];
+        }, $user1);
+
+        // var_dump($user);
+        // die;
+
+        $config = [
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'bucekcoffe@gmail.com',
+            'smtp_pass' => 'Liger1998',
+            'smtp_port' =>  465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
+        ];
+        $x['data'] = $this->Mpaket->booking_email($kode);
+
+        $this->email->initialize($config);
+        $this->email->from('bucekcoffe@gmail.com', 'Sumbawa Tour');
+        $this->email->to($user);
+        $message = $this->load->view('nfront/email/admin_email_confirmation', $x, TRUE);
+
+
+        $this->email->subject('Proses Konfirmasi Pemesanan Tiket');
+        $this->email->message($message);
+
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
         }
     }
 }

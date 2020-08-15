@@ -8,7 +8,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('Mberita');
 		$this->load->model('Mtestimoni');
 		$this->load->model('Mpaket');
-		$this->load->model('m_pengunjung');
+		$this->load->model('M_pengunjung');
 		if ($this->session->userdata('masuk') != TRUE) {
 			$url = base_url('administrator');
 			redirect($url);
@@ -17,12 +17,12 @@ class Dashboard extends CI_Controller
 	function index()
 	{
 		if ($this->session->userdata('akses') == '1') {
-			$x['visitor'] = $this->m_pengunjung->statistik_pengujung();
-			$x['penjualan_mounth'] = $this->m_pengunjung->statistik_penjualan();
+			$x['visitor'] = $this->M_pengunjung->statistik_pengujung();
+			$x['penjualan_mounth'] = $this->M_pengunjung->statistik_penjualan();
 
 			// var_dump($x['penjualan']);
 			// die;
-			$x['penjualan'] = $this->m_pengunjung->send_email();
+			$x['penjualan'] = $this->M_pengunjung->send_email();
 
 			$this->load->view('backend/v_dashboard', $x);
 		} else {
@@ -32,7 +32,7 @@ class Dashboard extends CI_Controller
 
 	function SendEmail()
 	{
-		$user1 = $this->m_pengunjung->send_email()->result_array();
+		$user1 = $this->M_pengunjung->send_email()->result_array();
 		$user = array_map(function ($current) {
 			return $current['email'];
 		}, $user1);
@@ -47,7 +47,7 @@ class Dashboard extends CI_Controller
 	{
 		$limit = 8;
 		$x['news'] = $this->Mwisata->get_wisata_email($limit);
-		$x['paket_populer'] = $this->m_pengunjung->paket_populer();
+		$x['paket_populer'] = $this->M_pengunjung->paket_populer();
 
 		$config = [
 			'protocol'  => 'smtp',
@@ -59,7 +59,7 @@ class Dashboard extends CI_Controller
 			'charset'   => 'utf-8',
 			'newline'   => "\r\n"
 		];
-		$x['paket_populer'] = $this->m_pengunjung->paket_populer();
+		$x['paket_populer'] = $this->M_pengunjung->paket_populer();
 
 		$this->email->initialize($config);
 		$this->email->from('bucekcoffe@gmail.com', 'Sumbawa Tour');

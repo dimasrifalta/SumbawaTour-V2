@@ -52,9 +52,9 @@ $b = $data->row_array();
                 <tr>
                     <th class="no">Paket Tour</th>
                     <th class="desc">Keberangkatan</th>
-                    <th class="unit">Dewasa</th>
-                    <th class="qty">Anak-Anak</th>
-                    <th class="total">Total</th>
+                    <th class="unit">Kembali</th>
+                    <th class="qty">Harga Paket</th>
+                    <th class="total">Jumlah Berangkat</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,8 +63,11 @@ $b = $data->row_array();
                     <td class="desc">
                         <?php echo tanggal($b['berangkat']); ?>
                     </td>
-                    <td class="unit"><?php echo $b['adult'] . ' Orang'; ?></td>
-                    <td class="qty"><?php echo $b['kids'] . ' Orang'; ?>
+                    <td class="unit">
+                        <?php echo tanggal($b['kembali']); ?>
+                    </td>
+                    <td class="qty">
+                        <?php echo 'Rp. ' . number_format($b['hrg_dewasa']); ?>
                     </td>
                     <td class="total"><?php echo $b['jml_berangkat'] .  ' Orang'; ?></td>
                 </tr>
@@ -75,14 +78,14 @@ $b = $data->row_array();
                     <td colspan="2"></td>
                     <td colspan="2">Dewasa</td>
 
-                    <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_dewasa']); ?> X <?php echo $b['adult']; ?></td>
+                    <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_dewasa']); ?> X <?php echo $b['jml_berangkat']; ?></td>
 
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td colspan="2"></td>
                     <td colspan="2">Anak-anak</td>
                     <td><?php echo 'Rp. ' . number_format($b['hrg_anak']) . ' X '; ?> <?php echo $b['kids']; ?></td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td colspan="2"></td>
                     <td colspan="2">GRAND TOTAL</td>

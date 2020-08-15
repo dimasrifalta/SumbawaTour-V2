@@ -33,24 +33,38 @@ class Konfirmasi extends CI_Controller
         for ($i = 0; $i < 6; $i++) {
             $res .= $chars[mt_rand(0, strlen($chars) - 1)];
         }
-        // var_dump($res);
-        // die();
+
+
+        //set kode booking
         $this->db->query("UPDATE orders SET kode_booking='$res' WHERE id_order='$id'");
+        //ambil jam sekarang tambah 3 detik
+        $a3 = "SELECT DATE_ADD(CURRENT_TIMESTAMP,INTERVAL 3 SECOND) AS sekarang";
+        $now = $this->db->query($a3)->row_array();
+        $tanggal = $now['sekarang'];
+
+        //create event untuk menghapus event Invoice order  
+        $sql2 = " CREATE EVENT Hapus$id        
+                ON SCHEDULE AT '$tanggal'
+                    DO
+                    BEGIN
+                    DROP EVENT IF EXISTS $id;                        
+                END ";
+
+        $this->db->query($sql2);
+
+        //kirim tiket ke email customer
         $this->_sendEmail($id);
         $this->Morders->bayar_selesai($id);
         $this->db->query("UPDATE paket SET views=views+1 WHERE idpaket='$idpaket'");
 
-        // $this->db->query("UPDATE available_tour SET jumlah_ketersedian=jumlah_ketersedian-(SELECT SUM(adult+kids)AS jml_berangkat FROM orders WHERE id_order='$id') WHERE id=(SELECT id_ketersediaan_tanggal from  orders WHERE id_order='$id') ");
+
 
         //simpan data ketabel transaksi
         $date_created = date('Y-m-d H:i:s');
         $this->Morders->simpan_transaksi($id);
         $this->db->query("UPDATE transaksi SET kode_booking='$res' ,date_created='$date_created',transaksi.status='LUNAS' WHERE id_order='$id'");
 
-
-        //Kirim email_invoice
-
-        echo $this->session->set_flashdata('msg', 'success');
+        echo $this->session->set_flashdata('msg', 'success1');
         redirect('backend/konfirmasi');
     }
     /*kirim email*/
@@ -122,10 +136,15 @@ class Konfirmasi extends CI_Controller
     {
         $id = $this->uri->segment(4);
 
-        $this->Morders->set_pembatalan($id);
+
         //Kirim email_invoice
         $this->_sendEmailPembatalan($id);
 
+        //Update stok dengan stok +jumlah beli
+        $this->db->query("UPDATE available_tour SET jumlah_ketersedian=jumlah_ketersedian+(SELECT SUM(adult+kids)AS jml_berangkat FROM orders WHERE id_order='$id') WHERE id=(SELECT id_ketersediaan_tanggal from  orders WHERE id_order='$id') ");
+
+        //update status menjadi batal
+        $this->Morders->set_pembatalan($id);
         echo $this->session->set_flashdata('msg', 'success');
         redirect('backend/Konfirmasi');
     }

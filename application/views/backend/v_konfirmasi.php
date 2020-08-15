@@ -602,6 +602,19 @@ $jum_konfirmasi = $query4->num_rows();
                 bgColor: '#7EC857'
             });
         </script>
+
+    <?php elseif ($this->session->flashdata('msg') == 'success1') : ?>
+        <script type="text/javascript">
+            $.toast({
+                heading: 'Success',
+                text: "Konfirmasi tiket selesai",
+                showHideTransition: 'slide',
+                icon: 'success',
+                hideAfter: false,
+                position: 'bottom-right',
+                bgColor: '#7EC857'
+            });
+        </script>
     <?php elseif ($this->session->flashdata('msg') == 'success-hapus') : ?>
         <script type="text/javascript">
             $.toast({

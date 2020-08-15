@@ -21,7 +21,7 @@ class Morders extends CI_Model
     }
     function get_orders()
     {
-        $hasil = $this->db->query("SELECT pembatalan,id_order,tanggal,nama_paket,hrg_dewasa,hrg_anak,adult,kids,SUM(adult+kids)AS jml_berangkat,(hrg_dewasa*adult) AS sub_dewasa,(hrg_anak*kids)AS sub_anak,SUM((hrg_dewasa*adult)+(hrg_anak*kids))AS total,berangkat,kembali,metode,bank,norek,atasnama,nama,IF(jenkel='L','Laki-Laki','Perempuan')AS jenkel,alamat,notelp,email,keterangan,orders.status FROM orders JOIN metode_bayar ON metode_id=id_metode JOIN paket ON paket_id_order=idpaket GROUP BY id_order order by tanggal desc");
+        $hasil = $this->db->query("SELECT orders.date_created,pembatalan,id_order,tanggal,nama_paket,hrg_dewasa,hrg_anak,adult,kids,SUM(adult+kids)AS jml_berangkat,(hrg_dewasa*adult) AS sub_dewasa,(hrg_anak*kids)AS sub_anak,SUM((hrg_dewasa*adult)+(hrg_anak*kids))AS total,berangkat,kembali,metode,bank,norek,atasnama,nama,IF(jenkel='L','Laki-Laki','Perempuan')AS jenkel,alamat,notelp,email,keterangan,orders.status FROM orders JOIN metode_bayar ON metode_id=id_metode JOIN paket ON paket_id_order=idpaket GROUP BY id_order order by orders.date_created desc");
         return $hasil;
     }
 
@@ -50,7 +50,7 @@ class Morders extends CI_Model
     }
     function hapus_orders($kode)
     {
-        $hasil = $this->db->query("delete from orders WHERE id_order='$kode'");
+        $hasil = $this->db->query("UPDATE orders SET status='BATAL' WHERE id_order='$kode'");
         return $hasil;
     }
     function get_bank()
@@ -75,5 +75,13 @@ class Morders extends CI_Model
     {
         $hasil = $this->db->query("UPDATE orders SET status='BATAL' WHERE id_order='$id'");
         return $hasil;
+    }
+
+
+    //Send email Konfirmasi ke admin sumbawa island tour
+    function  send_email()
+    {
+        $hsl = $this->db->query("SELECT * FROM admin");
+        return $hsl;
     }
 }

@@ -264,142 +264,149 @@ $jum_konfirmasi = $query4->num_rows();
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="tab" role="tabpanel">
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-user"></i>Data Order</a></li>
-                <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-envelope"></i>Data Transaksi</a></li>
+            <div class="box box-info">
+              <div class="tab" role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-user"></i>Data Order</a></li>
+                  <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-envelope"></i>Data Transaksi</a></li>
 
-              </ul>
-              <!-- Tab panes -->
-              <div class="tab-content tabs">
-                <div role="tabpanel" class="tab-pane fade in active" id="Section1">
-                  <h3>Data Order</h3>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <table id="example1" class="table table-striped" style="font-size:12px;">
-                      <thead>
-                        <tr>
-                          <th style="text-align:center;width: 130px;">No Invoice</th>
-                          <th style="text-align:center;">Tgl Invoice</th>
-                          <th style="text-align:center;">Atas Nama</th>
-                          <th style="text-align:center;">Dewasa</th>
-                          <th style="text-align:center;">Anak-Anak</th>
-                          <th style="text-align:center;">Keberangkatan</th>
-                          <th style="text-align:center;">Kepulangan</th>
-                          <th style="text-align:center;">Total Bayar</th>
-                          <th style="text-align:center;width:100px;">Aksi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        $no = 0;
-                        foreach ($data->result_array() as $a) :
-                          $no++;
-                          $id = $a['id_order'];
-                          $tgl = $a['tanggal'];
-                          $nama = $a['nama'];
-                          $jenkel = $a['jenkel'];
-                          $alamat = $a['alamat'];
-                          $notelp = $a['notelp'];
-                          $berangkat = $a['berangkat'];
-                          $kembali = $a['kembali'];
-                          $total = $a['total'];
-                          $dewasa = $a['adult'];
-                          $anak = $a['kids'];
-                          $status = $a['status'];
-                          $pembatalan = $a['pembatalan'];
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content tabs">
+                  <div role="tabpanel" class="tab-pane fade in active" id="Section1">
+                    <h3>Data Order</h3>
+                    <div class="panel panel-default">
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <table id="example1" class="table table-striped" style="font-size:12px;">
+                          <thead>
+                            <tr>
+                              <th style="text-align:center;width: 130px;">No Invoice</th>
+                              <th style="text-align:center;">Tgl Invoice</th>
+                              <th style="text-align:center;">Atas Nama</th>
+                              <th style="text-align:center;">Jumlah Berangkat</th>
+                              <th style="text-align:center;">Nama Paket Tour</th>
+                              <th style="text-align:center;">Keberangkatan</th>
+                              <th style="text-align:center;">Kepulangan</th>
+                              <th style="text-align:center;">Total Bayar</th>
+                              <th style="text-align:center;width:100px;">Aksi</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            $no = 0;
+                            foreach ($data->result_array() as $a) :
+                              $no++;
+                              $id = $a['id_order'];
+                              $tgl = $a['tanggal'];
+                              $nama = $a['nama'];
+                              $jenkel = $a['jenkel'];
+                              $alamat = $a['alamat'];
+                              $notelp = $a['notelp'];
+                              $berangkat = $a['berangkat'];
+                              $kembali = $a['kembali'];
+                              $total = $a['total'];
+                              $jml_berangkat = $a['jml_berangkat'];
+                              $nama_paket = $a['nama_paket'];
+                              $status = $a['status'];
+                              $pembatalan = $a['pembatalan'];
 
-                        ?>
-                          <tr>
-                            <td style="vertical-align: middle;"><?php echo $id; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $tgl; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $nama; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $dewasa; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $anak; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $berangkat; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $kembali; ?></td>
-                            <td style="text-align: right;vertical-align: middle;"><?php echo 'Rp ' . number_format($total); ?></td>
-                            <td style="text-align: center;vertical-align: middle;">
-                              <?php
-                              if ($status == 'LUNAS') : ?>
-                                <label class="label label-success">LUNAS</label>
-                              <?php elseif ($status == 'BATAL') : ?>
-                                <label class="label label-danger">BATAL</label>
-                              <?php else : ?>
-                                <a class="btn btn-xs btn-info" href="<?php echo base_url() . 'backend/konfirmasi/pembayaran_selesai' . $id ?>" data-toggle="modal" title="Pembayaran Selesai"><span class="fa fa-check"></span> </a>
-                                <a class="btn btn-xs btn-warning" href="#modalEdit<?php echo $id ?>" data-toggle="modal" title="Edit"><span class="fa fa-pencil"></span> </a>
-                                <a class="btn btn-xs btn-danger" href="#ModalHapus<?php echo $id; ?>" data-toggle="modal" title="Batalkan"><span class="fa fa-close"></span> </a>
-                              <?php endif ?>
-                            </td>
-                          </tr>
-                        <?php endforeach; ?>
-                      </tbody>
-                    </table>
+                            ?>
+                              <tr>
+                                <td style="vertical-align: middle;"><?php echo $id; ?></td>
+                                <td style="vertical-align: middle;"><?php echo tanggal($tgl); ?></td>
+                                <td style="vertical-align: middle;"><?php echo $nama; ?></td>
+                                <td style="vertical-align: middle;"><?php echo $jml_berangkat; ?></td>
+                                <td style="vertical-align: middle;"><?php echo $nama_paket; ?></td>
+                                <td style="vertical-align: middle;"><?php echo $berangkat; ?></td>
+                                <td style="vertical-align: middle;"><?php echo $kembali; ?></td>
+                                <td style="text-align: right;vertical-align: middle;"><?php echo 'Rp ' . number_format($total); ?></td>
+                                <td style="text-align: center;vertical-align: middle;">
+                                  <?php
+                                  if ($status == 'LUNAS') : ?>
+                                    <label class="label label-success">LUNAS</label>
+                                  <?php elseif ($status == 'BATAL') : ?>
+                                    <label class="label label-danger">BATAL</label>
+                                  <?php else : ?>
+                                    <!-- <a class="btn btn-xs btn-info" href="<?php echo base_url() . 'backend/konfirmasi/pembayaran_selesai' . $id ?>" data-toggle="modal" title="Pembayaran Selesai"><span class="fa fa-check"></span> </a> -->
+                                    <a class="btn btn-xs btn-warning" href="#modalEdit<?php echo $id ?>" data-toggle="modal" title="Edit"><span class="fa fa-pencil"></span> </a>
+                                    <!-- <a class="btn btn-xs btn-danger" href="#ModalHapus<?php echo $id; ?>" data-toggle="modal" title="Batalkan"><span class="fa fa-close"></span> </a> -->
+                                  <?php endif ?>
+                                </td>
+                              </tr>
+                            <?php endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+
                   </div>
-                  <!-- /.box-body -->
+                  <div role="tabpanel" class="tab-pane fade" id="Section2">
+                    <h3>Data Transaksi Penjualan Tiket</h3>
+                    <!-- /.box-header -->
+                    <div class="box-header">
+                      <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#my-cetak"><span class="fa fa-search"></span> Cari Data Penjualan Tiket</a>
+                    </div>
+
+                    <div class="panel panel-default">
+                      <div class="box-body">
+                        <table id="example2" class="table table-striped" style="font-size:12px;">
+                          <thead>
+                            <tr>
+                              <th style="text-align:center;width: 130px;">No Invoice</th>
+                              <th style="text-align:center;">Tgl Invoice</th>
+                              <th style="text-align:center;">Atas Nama</th>
+                              <th style="text-align:center;">Jumlah Berangkat</th>
+                              <th style="text-align:center;">Nama Paket Tour</th>
+                              <th style="text-align:center;">Keberangkatan</th>
+                              <th style="text-align:center;">Kepulangan</th>
+                              <th style="text-align:center;">Total Bayar</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            $no = 0;
+                            foreach ($data_transaksi->result_array() as $a) :
+                              $no++;
+                              $id = $a['id_order'];
+                              $tgl = $a['date_created'];
+                              $nama = $a['nama'];
+                              $jenkel = $a['jenkel'];
+                              $alamat = $a['alamat'];
+                              $notelp = $a['notelp'];
+                              $berangkat = $a['berangkat'];
+                              $kembali = $a['kembali'];
+                              $total = $a['total'];
+                              $jml_berangkat = $a['jml_berangkat'];
+                              $nama_paket = $a['nama_paket'];
+                              $status = $a['status'];
+
+
+
+                            ?>
+                              <tr>
+                                <td style="vertical-align: middle;"><?php echo $id; ?></td>
+                                <td style="vertical-align: middle;"><?php echo tanggal($tgl); ?></td>
+                                <td style="vertical-align: middle;"><?php echo $nama; ?></td>
+                                <td style="vertical-align: middle;"><?php echo $jml_berangkat; ?></td>
+                                <td style="vertical-align: middle;"><?php echo $nama_paket; ?></td>
+                                <td style="vertical-align: middle;"><?php echo $berangkat; ?></td>
+                                <td style="vertical-align: middle;"><?php echo $kembali; ?></td>
+                                <td style="text-align: right;vertical-align: middle;"><?php echo 'Rp ' . number_format($total); ?></td>
+
+                              </tr>
+                            <?php endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
 
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="Section2">
-                  <h3>Data Transaksi Penjualan Tiket</h3>
-                  <!-- /.box-header -->
-                  <div class="box-header">
-                    <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#my-cetak"><span class="fa fa-search"></span> Cari Data Penjualan Tiket</a>
-                  </div>
-                  <div class="box-body">
-                    <table id="example2" class="table table-striped" style="font-size:12px;">
-                      <thead>
-                        <tr>
-                          <th style="text-align:center;width: 130px;">No Invoice</th>
-                          <th style="text-align:center;">Tgl Invoice</th>
-                          <th style="text-align:center;">Atas Nama</th>
-                          <th style="text-align:center;">Dewasa</th>
-                          <th style="text-align:center;">Anak-Anak</th>
-                          <th style="text-align:center;">Keberangkatan</th>
-                          <th style="text-align:center;">Kepulangan</th>
-                          <th style="text-align:center;">Total Bayar</th>
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        $no = 0;
-                        foreach ($data_transaksi->result_array() as $a) :
-                          $no++;
-                          $id = $a['id_order'];
-                          $tgl = $a['date_created'];
-                          $nama = $a['nama'];
-                          $jenkel = $a['jenkel'];
-                          $alamat = $a['alamat'];
-                          $notelp = $a['notelp'];
-                          $berangkat = $a['berangkat'];
-                          $kembali = $a['kembali'];
-                          $total = $a['total'];
-                          $dewasa = $a['adult'];
-                          $anak = $a['kids'];
-                          $status = $a['status'];
-
-
-
-                        ?>
-                          <tr>
-                            <td style="vertical-align: middle;"><?php echo $id; ?></td>
-                            <td style="vertical-align: middle;"><?php echo tanggal($tgl); ?></td>
-                            <td style="vertical-align: middle;"><?php echo $nama; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $dewasa; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $anak; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $berangkat; ?></td>
-                            <td style="vertical-align: middle;"><?php echo $kembali; ?></td>
-                            <td style="text-align: right;vertical-align: middle;"><?php echo 'Rp ' . number_format($total); ?></td>
-
-                          </tr>
-                        <?php endforeach; ?>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- /.box-body -->
-                </div>
-
               </div>
             </div>
           </div>
@@ -570,6 +577,7 @@ $jum_konfirmasi = $query4->num_rows();
   <script src="<?php echo base_url() . 'assets/dist/js/demo.js' ?>"></script>
   <script type="text/javascript" src="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.js' ?>"></script>
   <!-- page script -->
+
   <script>
     $(function() {
       $("#example1").DataTable();

@@ -4,11 +4,11 @@ error_reporting(0);
 $query = $this->db->query("SELECT * FROM tbl_inbox WHERE inbox_status='1'");
 $query2 = $this->db->query("SELECT * FROM orders WHERE status <> 'LUNAS'");
 $query3 = $this->db->query("SELECT * FROM testimoni WHERE status ='0'");
-$query4 = $this->db->query("SELECT * FROM pembayaran");
+$query4 = $this->db->query("SELECT * FROM orders a JOIN pembayaran b ON a.id_order = b.order_id WHERE a.status='belum_bayar'");
 $jum_pesan = $query->num_rows();
 $jum_order = $query2->num_rows();
 $jum_testimoni = $query3->num_rows();
-$jum_konfirmasi = $query3->num_rows();
+$jum_konfirmasi = $query4->num_rows();
 ?>
 <!DOCTYPE html>
 <html>
@@ -399,7 +399,7 @@ $jum_konfirmasi = $query3->num_rows();
               <div class="box-body no-padding">
                 <ul class="users-list clearfix">
                   <?php
-                  $query = $this->db->query("SELECT  name, DATE_FORMAT(FROM_UNIXTIME(`date_created`), '%Y-%m-%d ') AS `date` FROM user WHERE is_active='1' ORDER BY id ASC LIMIT 8");
+                  $query = $this->db->query("SELECT  name, DATE_FORMAT(FROM_UNIXTIME(`date_created`), '%Y-%m-%d ') AS `date` FROM user WHERE is_active='1' AND id !=1 ORDER BY id ASC LIMIT 8");
                   foreach ($query->result_array() as $i) :
                     $name = $i['name'];
                     $date_created = $i['date'];

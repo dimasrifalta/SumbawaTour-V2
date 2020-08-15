@@ -10,6 +10,7 @@ class Pembatalan extends CI_Controller
         is_logged_in();
 
         $this->load->model('Mpaket');
+        $this->load->model('Morders');
         $this->load->model('Mberita');
     }
 
@@ -62,6 +63,7 @@ class Pembatalan extends CI_Controller
         /*kirim email*/
         $this->session->set_flashdata('flash', 'Ditambahkan');
         $this->_sendEmail($order_id);
+        $this->_sendEmailToAdmin($order_id);
 
         $this->Mpaket->simpan_pembatalan($order_id, $id_user, $no_rek, $nama_rekening, $alasan_pembatalan);
 
@@ -99,6 +101,47 @@ class Pembatalan extends CI_Controller
         $this->email->subject('Konfirmasi Pembatalan Tiket Anda');
         $this->email->message($message);
 
+
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
+    }
+
+    /*kirim email*/
+    private function _sendEmailToAdmin($kode)
+    {
+        $user1 = $this->Morders->send_email()->result_array();
+        $user = array_map(function ($current) {
+            return $current['username'];
+        }, $user1);
+
+        // var_dump($user);
+        // die;
+
+        $config = [
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'bucekcoffe@gmail.com',
+            'smtp_pass' => 'Liger1998',
+            'smtp_port' =>  465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
+        ];
+        $x['data'] = $this->Mpaket->booking_email($kode);
+
+        $this->email->initialize($config);
+        $this->email->from('bucekcoffe@gmail.com', 'Sumbawa Tour');
+        $this->email->to($user);
+        $message = $this->load->view('nfront/email/admin_email_confirmation', $x, TRUE);
+
+
+        $this->email->subject('Proses Konfirmasi Pemesanan Tiket');
+        $this->email->message($message);
 
 
         if ($this->email->send()) {
