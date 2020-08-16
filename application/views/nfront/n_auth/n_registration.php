@@ -48,12 +48,12 @@
                         <i class="zmdi zmdi-font"></i>
                     </span>
                     <?= $this->session->flashdata('message'); ?>
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                    <div class="wrap-input100 validate-input" data-validate="Enter Name">
                         <input class="input100" name="name" id="name" value="<?= set_value('name'); ?>">
                         <span class="focus-input100" data-placeholder="Name"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input">
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
                         <input class="input100" name="email" id="email" value="<?= set_value('email'); ?>">
                         <span class="focus-input100" data-placeholder="Email"></span>
                         <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -80,7 +80,7 @@
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">
+                            <button id="test" class="login100-form-btn">
                                 Register
                             </button>
                         </div>
@@ -122,6 +122,24 @@
     <!--===============================================================================================-->
     <script src="<?= base_url('assets/vendors/login_v2'); ?>/js/main.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+    <!-- page script -->
+    <script>
+        $(document).ready(function() {
+
+            $("#test,#test2").click(function() {
+                // Font Awesome
+                $.LoadingOverlay("show", {
+                    image: "",
+                    fontawesome: "fa fa-cog fa-spin"
+                });
+                // Hide it after 3 seconds
+                setTimeout(function() {
+                    $.LoadingOverlay("hide");
+                }, 3000);
+            });
+        });
+    </script>
 
 </body>
 <!-- This templates was made by Colorlib (https://colorlib.com) -->

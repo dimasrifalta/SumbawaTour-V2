@@ -146,6 +146,23 @@
 <script type="module" src="<?php echo base_url('assets/addchat/js/addchat.min.js') ?>"></script>
 <!-- Fallback support for Older browsers -->
 <script nomodule src="<?php echo base_url('assets/addchat/js/addchat-legacy.min.js') ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+<!-- page script -->
+<script>
+    $(document).ready(function() {
+        $("#test,#test2").click(function() {
+            // Font Awesome
+            $.LoadingOverlay("show", {
+                image: "",
+                fontawesome: "fa fa-cog fa-spin"
+            });
+            // Hide it after 3 seconds
+            setTimeout(function() {
+                $.LoadingOverlay("hide");
+            }, 10000);
+        });
+    });
+</script>
 
 
 

@@ -137,7 +137,7 @@
 
                       <hr class="mb-4">
 
-                      <p><button type="submit" class="btn btn-primary py-3 px-5">Batalkan Tiket</button></p>
+                      <p><button type="submit" id="test" class="btn btn-primary py-3 px-5">Batalkan Tiket</button></p>
 
                   </form>
               </div>

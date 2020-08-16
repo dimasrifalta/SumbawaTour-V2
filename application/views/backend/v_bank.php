@@ -37,6 +37,7 @@ $jum_konfirmasi = $query4->num_rows();
     <link rel="stylesheet" href="<?php echo base_url() . 'assets/dist/css/skins/_all-skins.min.css' ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.css' ?>" />
 
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -205,6 +206,8 @@ $jum_konfirmasi = $query4->num_rows();
                             <div class="box">
                                 <div class="box-header">
                                     <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#ModalAddNew"><span class="fa fa-plus"></span> Add New</a>
+
+
                                 </div>
 
                                 <!-- /.box-header -->
@@ -414,8 +417,22 @@ $jum_konfirmasi = $query4->num_rows();
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url() . 'assets/dist/js/demo.js' ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.js' ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
     <!-- page script -->
     <script>
+        $(document).ready(function() {
+            $("#test").click(function() {
+                // Show full page LoadingOverlay
+                $.LoadingOverlay("show");
+
+                // Hide it after 3 seconds
+                setTimeout(function() {
+                    $.LoadingOverlay("hide");
+                }, 3000);
+            });
+        });
+
+
         $(function() {
             $("#example1").DataTable();
             $('#example2').DataTable({

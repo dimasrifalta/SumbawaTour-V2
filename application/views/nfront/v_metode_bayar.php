@@ -78,6 +78,7 @@
         <center>
             <?php echo $this->session->flashdata('message'); ?>
             <h1 class="heading mb-4">Pilih Metode Pembayaran</h1>
+            <a class="btn btn-success btn-flat" id="test2"><span class="fa fa-plus"></span> New</a>
         </center>
         <div class="container section">
             <div class="table-responsive-sm">
@@ -105,7 +106,7 @@
                                 <td><?php echo $bank; ?></td>
                                 <td><?php echo $norek; ?></td>
                                 <td><?php echo $atasnama; ?></td>
-                                <td><a href="<?php echo base_url() . 'paket_tour/set_pembayaran/' . $idmetode; ?>" class="badge badge-success">Pilih</a></td>
+                                <td><a href="<?php echo base_url() . 'paket_tour/set_pembayaran/' . $idmetode; ?>" class="badge badge-success" id="test">Pilih</a></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

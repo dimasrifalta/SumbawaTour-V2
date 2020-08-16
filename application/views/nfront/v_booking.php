@@ -533,9 +533,9 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
                     <tr>
                         <th class="desc">Paket Tour</th>
                         <th class="qty">Keberangkatan</th>
-                        <th class="unit">Dewasa</th>
-                        <th class="total">Anak-Anak</th>
-                        <th class="total">Total</th>
+                        <th class="unit">Kembali</th>
+                        <th class="total">Harga Paket</th>
+                        <th class="total">Jumlah Berangkat</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -544,8 +544,8 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
                             <h3><?php echo $b['nama_paket']; ?></h3>
                         </td>
                         <td class="qty"><?php echo tanggal($b['berangkat']); ?></td>
-                        <td class="unit"><?php echo $b['adult'] . ' Orang'; ?></td>
-                        <td class="total"><?php echo $b['kids'] . ' Orang'; ?></td>
+                        <td class="unit"><?php echo tanggal($b['kembali']); ?></td>
+                        <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_dewasa']); ?></td>
                         <td class="total"><?php echo $b['jml_berangkat'] .  ' Orang'; ?></td>
                     </tr>
 
@@ -557,15 +557,15 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
                         <tr>
                             <td class="desc"></td>
                             <td class="qty"></td>
-                            <td class="unit">DEWASA:</td>
+                            <td class="unit">Harga:</td>
                             <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_dewasa']); ?> X <?php echo $b['adult']; ?></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td class="desc"></td>
                             <td class="qty"></td>
                             <td class="unit">ANAK-ANAK :</td>
                             <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_anak']) . '  X  '; ?> <?php echo $b['kids']; ?></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td class="desc"></td>
                             <td class="unit" colspan="2">GRAND TOTAL:</td>
@@ -645,9 +645,9 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
                     <tr>
                         <th class="desc">Paket Tour</th>
                         <th class="qty">Keberangkatan</th>
-                        <th class="unit">Dewasa</th>
-                        <th class="total">Anak-Anak</th>
-                        <th class="total">Total</th>
+                        <th class="unit">Kembali</th>
+                        <th class="total">Harga Paket</th>
+                        <th class="total">Jumlah Berangkat</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -656,8 +656,8 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
                             <h3><?php echo $b['nama_paket']; ?></h3>
                         </td>
                         <td class="qty"><?php echo tanggal($b['berangkat']); ?></td>
-                        <td class="unit"><?php echo $b['adult'] . ' Orang'; ?></td>
-                        <td class="total"><?php echo $b['kids'] . ' Orang'; ?></td>
+                        <td class="unit"><?php echo tanggal($b['kembali']); ?></td>
+                        <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_dewasa']); ?></td>
                         <td class="total"><?php echo $b['jml_berangkat'] .  ' Orang'; ?></td>
                     </tr>
 
@@ -669,15 +669,15 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
                         <tr>
                             <td class="desc"></td>
                             <td class="qty"></td>
-                            <td class="unit">DEWASA:</td>
+                            <td class="unit">Harga:</td>
                             <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_dewasa']); ?> X <?php echo $b['adult']; ?></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td class="desc"></td>
                             <td class="qty"></td>
                             <td class="unit">ANAK-ANAK :</td>
                             <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_anak']) . '  X  '; ?> <?php echo $b['kids']; ?></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td class="desc"></td>
                             <td class="unit" colspan="2">GRAND TOTAL:</td>

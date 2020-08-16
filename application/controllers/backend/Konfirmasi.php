@@ -140,8 +140,6 @@ class Konfirmasi extends CI_Controller
         //Kirim email_invoice
         $this->_sendEmailPembatalan($id);
 
-        //Update stok dengan stok +jumlah beli
-        $this->db->query("UPDATE available_tour SET jumlah_ketersedian=jumlah_ketersedian+(SELECT SUM(adult+kids)AS jml_berangkat FROM orders WHERE id_order='$id') WHERE id=(SELECT id_ketersediaan_tanggal from  orders WHERE id_order='$id') ");
 
         //update status menjadi batal
         $this->Morders->set_pembatalan($id);

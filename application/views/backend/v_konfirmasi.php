@@ -281,6 +281,7 @@ $jum_konfirmasi = $query4->num_rows();
                             <div class="tab-content tabs">
                                 <div role="tabpanel" class="tab-pane fade in active" id="Section1">
                                     <h3>Konfirmasi Pembayaran</h3>
+
                                     <!-- /.box-header -->
                                     <div class="box-body">
                                         <table id="example1" class="table table-striped" style="font-size:12px;">
@@ -406,7 +407,7 @@ $jum_konfirmasi = $query4->num_rows();
 
                                                             <?php else : ?>
 
-                                                                <a class="btn" href="<?php echo base_url() . 'backend/konfirmasi/set_pembatalan/' . $a['id_order']; ?>" title="Konfirmasi Pembatalan"><span class="fa fa-check"></span> </a>
+                                                                <a id="test" class="btn" href="<?php echo base_url() . 'backend/konfirmasi/set_pembatalan/' . $a['id_order']; ?>" title="Konfirmasi Pembatalan"><span class="fa fa-check"></span> </a>
                                                                 <a class="btn" href="#ModalHapus<?php echo $id; ?>" data-toggle="modal" title="Hapus"><span class="fa fa-trash"></span> </a>
                                                         </td>
                                                     <?php endif ?>
@@ -475,7 +476,7 @@ $jum_konfirmasi = $query4->num_rows();
                         </div>
                         <div class="modal-footer">
                             <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Ok</button>
+                            <button type="submit" id="test2" class="btn btn-primary">Ok</button>
                         </div>
                     </form>
                 </div>
@@ -543,6 +544,28 @@ $jum_konfirmasi = $query4->num_rows();
     <script src="<?php echo base_url() . 'assets/dist/js/demo.js' ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.js' ?>"></script>
     <!-- page script -->
+
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+    <!-- page script -->
+    <script>
+        $(document).ready(function() {
+            $("#test,#test2").click(function() {
+                textResizeFactor: 0.3 // Float
+                // Text
+                $.LoadingOverlay("show", {
+                    image: "",
+                    text: "Loading..."
+                });
+                setTimeout(function() {
+                    $.LoadingOverlay("text", "Proses mengirim email...");
+                }, 2500);
+                // Hide it after 3 seconds
+                setTimeout(function() {
+                    $.LoadingOverlay("hide");
+                }, 15000);
+            });
+        });
+    </script>
     <script>
         $(function() {
             $("#example1").DataTable();

@@ -219,50 +219,10 @@ $b = $ketersediaan->row_array();
                         <?php } ?>
                     </p>
 
+
+
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets/vendors/'); ?>/photon/js/jquery-3.3.1.min.js"></script>
-
-<!-- <script>
-    $(document).ready(function() {
-        //this calculates values automatically 
-        calculateSum();
-
-        $(".adultamt").on("keydown keyup change", function() {
-            calculateSum();
-        });
-    });
-
-    function calculateSum() {
-        var sum = 0;
-        //iterate through each textboxes and add the values
-        $(".adultamt").each(function() {
-            //add only if the value is number
-            if (!isNaN(this.value) && this.value.length != 0) {
-                sum += parseFloat(this.value);
-                $(this).css("background-color", "#FEFFB0");
-            } else if (this.value.length != 0) {
-                $(this).css("background-color", "red");
-            }
-        });
-
-        $("input#total").val(sum.toFixed(2));
-    }
-</script> -->
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#adultamt").on("keydown keyup change", function() {
-            var harga = parseInt($("#harga").val());
-            var jumlah = parseInt($("#adultamt").val());
-            var total = harga * jumlah;
-            var rp = "Rp. "
-            var rupiah = rp + total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-
-            $("#total").val(rupiah);
-        });
-    });
-</script>

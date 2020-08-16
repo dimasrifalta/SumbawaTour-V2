@@ -159,11 +159,11 @@ class Mpaket extends CI_Model
         return $hasil;
     }
 
-    public function booking($id)
+    public function booking($id, $id_user)
     {
 
-        $id_user = $this->session->userdata('id');
-        $hasil = $this->db->query("SELECT deskripsi,orders.kode_booking,orders.status,pembayaran.id_user,orders.pembatalan, id_order,tanggal,nama_paket,hrg_dewasa,hrg_anak,adult,kids,SUM(adult + kids)AS jml_berangkat,(hrg_dewasa*adult) AS sub_dewasa,(hrg_anak*kids)AS sub_anak,SUM((hrg_dewasa*adult)+(hrg_anak*kids))AS total,berangkat,kembali,metode,bank,norek,atasnama,nama,IF(jenkel='L','Laki-Laki','Perempuan')AS jenkel,alamat,notelp,email FROM orders JOIN metode_bayar ON orders.metode_id=metode_bayar.id_metode JOIN paket ON orders.paket_id_order=paket.idpaket JOIN pembayaran ON orders.id_order=pembayaran.order_id WHERE pembayaran.id_user='$id_user' AND pembayaran.order_id='$id'  ");
+
+        $hasil = $this->db->query("SELECT deskripsi,orders.kode_booking,orders.status,orders.pembatalan, id_order,tanggal,nama_paket,hrg_dewasa,hrg_anak,adult,kids,SUM(adult + kids)AS jml_berangkat,(hrg_dewasa*adult) AS sub_dewasa,(hrg_anak*kids)AS sub_anak,SUM((hrg_dewasa*adult)+(hrg_anak*kids))AS total,berangkat,kembali,metode,bank,norek,atasnama,nama,IF(jenkel='L','Laki-Laki','Perempuan')AS jenkel,alamat,notelp,email FROM orders JOIN metode_bayar ON orders.metode_id=metode_bayar.id_metode JOIN paket ON orders.paket_id_order=paket.idpaket WHERE orders.id_order='$id'");
         return $hasil;
     }
 

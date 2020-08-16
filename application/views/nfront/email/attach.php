@@ -76,7 +76,7 @@ $b = $data->row_array();
             <tfoot>
                 <tr>
                     <td colspan="2"></td>
-                    <td colspan="2">Dewasa</td>
+                    <td colspan="2">Harga</td>
 
                     <td class="total"><?php echo 'Rp. ' . number_format($b['hrg_dewasa']); ?> X <?php echo $b['jml_berangkat']; ?></td>
 

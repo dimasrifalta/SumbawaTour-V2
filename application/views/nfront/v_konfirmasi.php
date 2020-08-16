@@ -156,7 +156,7 @@
 
                      <hr class="mb-4">
 
-                     <p><button type="submit" class="btn btn-primary py-3 px-5">Konfirmasi Sekarang</button></p>
+                     <p><button id="test" type="submit" class="btn btn-primary py-3 px-5">Konfirmasi Sekarang</button></p>
 
                  </form>
              </div>

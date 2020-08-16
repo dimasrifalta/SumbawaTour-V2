@@ -65,7 +65,7 @@
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
                             <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">
+                            <button id="test" class="login100-form-btn">
                                 Login
                             </button>
                         </div>
@@ -111,7 +111,24 @@
     <!--===============================================================================================-->
     <script src="<?= base_url('assets/vendors/login_v2'); ?>/js/main.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+    <!-- page script -->
+    <script>
+        $(document).ready(function() {
 
+            $("#test,#test2").click(function() {
+                // Font Awesome
+                $.LoadingOverlay("show", {
+                    image: "",
+                    fontawesome: "fa fa-cog fa-spin"
+                });
+                // Hide it after 3 seconds
+                setTimeout(function() {
+                    $.LoadingOverlay("hide");
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 
 

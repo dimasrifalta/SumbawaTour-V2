@@ -238,7 +238,8 @@ class Paket_tour extends CI_Controller
         $id = $this->uri->segment(3);
         $id_user = $this->session->userdata('id');
 
-        $x['data'] = $this->Mpaket->booking($id)->row_array();
+        $x['data'] = $this->Mpaket->booking($id, $id_user)->row_array();
+
         $x['testimoni_order'] = $this->mtestimoni->tampil_test_user($id);
         $x['data_testimoni'] = $this->Mpaket->booking_num_rows($id);
         $x['judul'] = "Booking Tiket";
