@@ -204,7 +204,7 @@ $n = $news->row_array();
 
 
                             </div>
-                            <img src="http://localhost/bucektravel/assets/gambars/<?= $gbr; ?>" alt="Image">
+                            <img src="<?php echo base_url() . 'assets/gambars/' . $gbr; ?>" alt="Image">
                         </div>
                     </div>
                 <?php

@@ -70,64 +70,54 @@
     </div>
 </div>
 
-<div class="site-section" data-aos="fade">
-    <div class="container-fluid">
+<div class="container">
+    <div class="site-section" data-aos="fade">
+        <div class="container-fluid">
 
-        <div class="row justify-content-center">
+            <div class="row justify-content-center">
 
-            <div class="col-md-7">
-                <div class="row mb-5">
-                    <div class="col-12 ">
-                        <h2 class="site-section-heading text-center">Nature Gallery</h2>
+                <div class="col-md-7">
+                    <div class="row mb-5">
+                        <div class="col-12 ">
+                            <h2 class="site-section-heading text-center"><?= $album['jdl_album']; ?> Gallery</h2>
+                        </div>
                     </div>
                 </div>
+
+            </div>
+            <div class="row" id="lightgallery">
+
+                <?php
+                foreach ($photo->result_array() as $b) {
+                    $id_galeri = $b['id_galeri'];
+                    $jdl_galeri = $b['jdl_galeri'];
+                    $gbr_galeri = $b['gbr_galeri'];
+                    $albumid = $b['albumid']; ?>
+
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 item " data-aos="fade" data-src="<?php echo base_url() . 'assets/gambars/' . $gbr_galeri; ?>" data-sub-html="<p><?php echo $jdl_galeri; ?></p>">
+                        <a href="#"><img src="<?php echo base_url() . 'assets/gambars/' . $gbr_galeri; ?>" alt="IMage" class="img-fluid"></a>
+                    </div>
+                <?php
+                }
+                ?>
+
+
             </div>
 
-        </div>
 
-        <div class="row justify-content-center" id="lightgallery">
-
-            <?php
-            foreach ($photo->result_array() as $b) {
-                $id_galeri = $b['id_galeri'];
-                $jdl_galeri = $b['jdl_galeri'];
-                $gbr_galeri = $b['gbr_galeri'];
-                $albumid = $b['albumid']; ?>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 item " data-aos="fade" data-src="<?php echo base_url() . 'assets/gambars/' . $gbr_galeri; ?>" data-sub-html="<h4><?php echo $jdl_galeri; ?></h4><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor doloremque hic excepturi fugit, sunt impedit fuga tempora, ad amet aliquid?</p>">
-                    <a href="#"><img src="<?php echo base_url() . 'assets/gambars/' . $gbr_galeri; ?>" alt="IMage" class="img-fluid"></a>
-                </div>
-            <?php
-            }
-            ?>
+            <!-- <div class="row mt-5">
+            <div class="col-md-12 pt-5">
+                <?= $page; ?>
 
 
-        </div>
-
-        <div class="row justify-content-center" id="video-gallery">
-
-
-
-            <div class="col-md-6 embed-responsive embed-responsive-16by9">
-                <object width="420" height="315" data="https://www.youtube.com/v/tgbNymZ7vqY">
-                </object>
             </div>
+        </div> -->
         </div>
     </div>
 </div>
 
 
 
-<div class="row mt-5">
-    <div class="col-md-12 pt-5">
-        <?= $page; ?>
-
-
-    </div>
-</div>
-</div><!-- .container -->
-
-</div><!-- .outer-container -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $('#video-gallery').lightGallery();
-</script>
+</script> -->

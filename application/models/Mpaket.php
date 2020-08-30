@@ -51,7 +51,7 @@ class Mpaket extends CI_Model
 
     public function tampil_paket()
     {
-        $hasil = $this->db->query("select * from paket where status='1'");
+        $hasil = $this->db->query("SELECT * FROM paket a JOIN kategori_paket b ON a.kategori_id = b.id_kategori where a.status='1'");
         return $hasil;
     }
 

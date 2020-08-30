@@ -3,9 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Mgaleri extends CI_Model
 {
-	function get_galeri($kode, $offset, $limit)
+	function get_galeri($kode)
 	{
-		$hasil = $this->db->query("select * from galeri where albumid='$kode' order by id_galeri DESC limit $offset,$limit");
+		$hasil = $this->db->query("select * from galeri where albumid='$kode' order by id_galeri DESC");
+		return $hasil;
+	}
+
+	function get_albumbyId($kode)
+	{
+		$hasil = $this->db->query("select * from album where idalbum='$kode'");
 		return $hasil;
 	}
 	function galeri_photo($offset, $limit)

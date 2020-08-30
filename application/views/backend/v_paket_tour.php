@@ -301,7 +301,7 @@ function limit_words($string, $word_limit)
                           <th>Gambar</th>
                           <th>Paket</th>
                           <th style="text-align: right;">Tarif Dewasa</th>
-                          <th style="text-align: right;">Tarif Anak-Anak</th>
+                          <th style="text-align: right;">Kategori</th>
                           <th style="text-align:right;">Aksi</th>
                         </tr>
                       </thead>
@@ -314,14 +314,14 @@ function limit_words($string, $word_limit)
                           $gambar = $a['gambar'];
                           $nama_paket = $a['nama_paket'];
                           $hrg_dewasa = $a['hrg_dewasa'];
-                          $hrg_anak = $a['hrg_anak'];
+                          $kategori = $a['kategori'];
                           $kategori_id = $a['kategori_id'];
                         ?>
                           <tr>
                             <td><img src="<?php echo base_url() . 'assets/gambars/' . $gambar; ?>" style="width:90px;"></td>
                             <td><?php echo $nama_paket; ?></td>
                             <td style="text-align: right;"><?php echo 'Rp ' . number_format($hrg_dewasa); ?></td>
-                            <td style="text-align: right;"><?php echo 'Rp ' . number_format($hrg_anak); ?></td>
+                            <td><?php echo $kategori; ?></td>
                             <td style="text-align:right;">
                               <a class="btn" data-toggle="modal" data-target="#ModalUpdate<?php echo $id; ?>"><span class="fa fa-pencil"></span></a>
                               <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $id; ?>"><span class="fa fa-trash"></span></a>

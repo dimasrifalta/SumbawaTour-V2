@@ -222,6 +222,7 @@ $jum_konfirmasi = $query4->num_rows();
                 <span class="info-box-text">Chrome</span>
                 <span class="info-box-number"><?php echo $jml; ?></span>
               </div>
+              <!-- <a class="btn btn-success btn-flat" id="test1"><span class="fa fa-plus"></span> Add New</a> -->
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -579,7 +580,7 @@ $jum_konfirmasi = $query4->num_rows();
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary btn-flat" id="simpan">Simpan</button>
+                <button type="submit" name="test" class="btn btn-primary btn-flat" id="simpan">Kirim</button>
               </div>
 
             </div>
@@ -612,7 +613,27 @@ $jum_konfirmasi = $query4->num_rows();
   <!-- AdminLTE for demo purposes -->
   <script src="<?php echo base_url() . 'assets/dist/js/demo.js' ?>"></script>
   <script type="text/javascript" src="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.js' ?>"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+  <!-- page script -->
+  <script>
+    $(document).ready(function() {
+      $("#test1").click(function() {
+        textResizeFactor: 0.3 // Float
+        // Text
+        $.LoadingOverlay("show", {
+          image: "",
+          text: "Loading..."
+        });
+        setTimeout(function() {
+          $.LoadingOverlay("text", "Proses mengirim email...");
+        }, 2500);
+        // Hide it after 3 seconds
+        setTimeout(function() {
+          $.LoadingOverlay("hide");
+        }, 10000);
+      });
+    });
+  </script>
   <script>
     var lineChartData = {
       labels: <?php echo json_encode($bulan); ?>,
