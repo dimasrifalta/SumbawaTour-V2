@@ -151,7 +151,7 @@ class Konfirmasi extends CI_Controller
     /*kirim email*/
     private function _sendEmailPembatalan($id)
     {
-
+        $email = $this->Mpaket->get_email($id)->row_array();
 
         $config = [
             'protocol'  => 'smtp',
@@ -171,7 +171,7 @@ class Konfirmasi extends CI_Controller
 
         $this->email->initialize($config);
         $this->email->from('bucekcoffe@gmail.com', 'SUmbawa Tour');
-        $this->email->to($this->session->userdata('email'));
+        $this->email->to($email['email']);
         $message = $this->load->view('nfront/email/email_invoice_pembatalan', $x, TRUE);
 
 

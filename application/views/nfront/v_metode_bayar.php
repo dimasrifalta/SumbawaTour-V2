@@ -78,7 +78,7 @@
         <center>
             <?php echo $this->session->flashdata('message'); ?>
             <h1 class="heading mb-4">Pilih Metode Pembayaran</h1>
-            <a class="btn btn-success btn-flat" id="test2"><span class="fa fa-plus"></span> New</a>
+            <!-- <a class="btn btn-success btn-flat" id="test2"><span class="fa fa-plus"></span> New</a> -->
         </center>
         <div class="container section">
             <div class="table-responsive-sm">

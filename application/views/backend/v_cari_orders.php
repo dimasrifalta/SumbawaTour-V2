@@ -217,8 +217,8 @@ $jum_konfirmasi = $query4->num_rows();
                                                 <th style="text-align:center;width: 130px;">No Invoice</th>
                                                 <th style="text-align:center;">Tgl Invoice</th>
                                                 <th style="text-align:center;">Atas Nama</th>
-                                                <th style="text-align:center;">Jumlah Berangkat</th>
-                                                <th style="text-align:center;">Nama Paket Tour</th>
+                                                <th style="text-align:center;">Dewasa</th>
+                                                <th style="text-align:center;">Anak-Anak</th>
                                                 <th style="text-align:center;">Keberangkatan</th>
                                                 <th style="text-align:center;">Kepulangan</th>
                                                 <th style="text-align:center;">Total Bayar</th>
@@ -231,7 +231,7 @@ $jum_konfirmasi = $query4->num_rows();
                                             foreach ($order->result_array() as $a) :
                                                 $no++;
                                                 $id = $a['id_order'];
-                                                $tgl = $a['date_created'];
+                                                $tgl = $a['tanggal'];
                                                 $nama = $a['nama'];
                                                 $jenkel = $a['jenkel'];
                                                 $alamat = $a['alamat'];
@@ -239,8 +239,8 @@ $jum_konfirmasi = $query4->num_rows();
                                                 $berangkat = $a['berangkat'];
                                                 $kembali = $a['kembali'];
                                                 $total = $a['total'];
-                                                $jml_berangkat = $a['jml_berangkat'];
-                                                $nama_paket = $a['nama_paket'];
+                                                $dewasa = $a['adult'];
+                                                $anak = $a['kids'];
                                                 $status = $a['status'];
 
 
@@ -250,12 +250,11 @@ $jum_konfirmasi = $query4->num_rows();
                                                     <td style="vertical-align: middle;"><?php echo $id; ?></td>
                                                     <td style="vertical-align: middle;"><?php echo tanggal($tgl); ?></td>
                                                     <td style="vertical-align: middle;"><?php echo $nama; ?></td>
-                                                    <td style="vertical-align: middle;"><?php echo $jml_berangkat; ?></td>
-                                                    <td style="vertical-align: middle;"><?php echo $nama_paket; ?></td>
+                                                    <td style="vertical-align: middle;"><?php echo $dewasa; ?></td>
+                                                    <td style="vertical-align: middle;"><?php echo $anak; ?></td>
                                                     <td style="vertical-align: middle;"><?php echo $berangkat; ?></td>
                                                     <td style="vertical-align: middle;"><?php echo $kembali; ?></td>
                                                     <td style="text-align: right;vertical-align: middle;"><?php echo 'Rp ' . number_format($total); ?></td>
-
 
                                                 </tr>
                                             <?php endforeach; ?>
