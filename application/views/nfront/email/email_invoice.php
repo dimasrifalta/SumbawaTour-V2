@@ -2,6 +2,7 @@
 error_reporting(0);
 $b = $data->row_array();
 //$c=$samp->row_array();
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -413,9 +414,10 @@ $b = $data->row_array();
                                                                     <?php echo $b['nama'] ?><br />
                                                                     <span class="header-sm">Tanggal pemesanan tiket</span><br />
                                                                     <?php echo tanggal($b['tanggal']) ?><br />
-                                                                    <br />
                                                                     <span class="header-sm">No Invoice</span> <br />
-                                                                    <?php echo $b['id_order'] ?>
+                                                                    <?php echo $b['id_order'] ?><br />
+                                                                    <span class="header-sm">Batas Waktu Pembayaran</span> <br />
+                                                                    <?php echo date('Y-m-d H:i:s', strtotime('+1 day', $b['expired_date']));; ?>
                                                                 </td>
                                                             </tr>
                                                         </table>

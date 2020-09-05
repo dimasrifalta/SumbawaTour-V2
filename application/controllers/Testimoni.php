@@ -30,6 +30,6 @@ class Testimoni extends CI_Controller
         $this->Mtestimoni->simpan_testimoni_order($id_order, $nama, $email, $msg);
         $this->session->set_flashdata('flash', '<div class="alert alert-success" role="alert"> Terimah kasih Telah Melakukan Testimoni!!</div>');
 
-        redirect('paket_tour/booking/');
+        redirect('paket_tour/Detail_booking/' . $id_order);
     }
 }

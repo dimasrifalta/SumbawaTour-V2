@@ -711,7 +711,7 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
                             } elseif ($date > $b['berangkat']) { ?>
 
                                 <a data-toggle="modal" data-target="#ModalUpdate<?php echo $b['id_order']; ?>" class="btn btn-primary py-1 px-2 ">Selesai dan beri testimoni</a>
-                                <a href="<?php echo base_url() . 'paket_tour/printtiket/' . $b['id_order']; ?>" class="btn btn-success py-1 px-2">Download Tiket</a>
+
 
                             <?php
                             } else { ?>
@@ -765,6 +765,7 @@ if ($b['status'] ==  "" or $b['status'] == "belum_bayar") { ?>
 <?php
 $no = 0;
 foreach ($b as $a) :
+    $nama = $this->session->userdata('name');
 
 ?>
     <!-- ============ MODAL UPDATE ALBUM =============== -->
@@ -788,7 +789,7 @@ foreach ($b as $a) :
                         <div class="form-group">
                             <label class="control-label col-xs-3">Nama</label>
                             <div class="col-xs-8">
-                                <input type="text" name="nama" id="name" class="form-control px-3 py-3" placeholder="Your Name" autocomplete="off" required />
+                                <input type="text" name="nama" id="name" value='<?= $nama; ?>' class="form-control px-3 py-3" value autocomplete="off" required />
                             </div>
                         </div>
 

@@ -329,7 +329,7 @@ $jum_konfirmasi = $query4->num_rows();
                                   <?php elseif ($status == 'BATAL') : ?>
                                     <label class="label label-danger">BATAL</label>
                                   <?php else : ?>
-                                    <!-- <a class="btn btn-xs btn-info" href="<?php echo base_url() . 'backend/konfirmasi/pembayaran_selesai' . $id ?>" data-toggle="modal" title="Pembayaran Selesai"><span class="fa fa-check"></span> </a> -->
+                                    <a class="btn btn-xs btn-info" href="<?php echo base_url() . 'backend/konfirmasi/pembayaran_selesai' . $id ?>" data-toggle="modal" title="Pembayaran Selesai"><span class="fa fa-check"></span> </a>
                                     <a class="btn btn-xs btn-warning" href="#modalEdit<?php echo $id ?>" data-toggle="modal" title="Edit"><span class="fa fa-pencil"></span> </a>
                                     <!-- <a class="btn btn-xs btn-danger" href="#ModalHapus<?php echo $id; ?>" data-toggle="modal" title="Batalkan"><span class="fa fa-close"></span> </a> -->
                                   <?php endif ?>
